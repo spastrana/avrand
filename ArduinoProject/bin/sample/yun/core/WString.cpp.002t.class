@@ -1,0 +1,26 @@
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x4190b070) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x4190b0a8) 0
+
+Class <anonymous struct>
+   size=3 align=1
+   base size=3 base align=1
+<anonymous struct> (0x0x4190b0e0) 0
+
+Class String
+   size=6 align=1
+   base size=6 base align=1
+String (0x0x4190b118) 0
+
+Class StringSumHelper
+   size=6 align=1
+   base size=6 base align=1
+StringSumHelper (0x0x4192f618) 0
+  String (0x0x4190b188) 0
+

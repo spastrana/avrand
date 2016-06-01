@@ -1,0 +1,392 @@
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x41924118) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x41924150) 0
+
+Class <anonymous struct>
+   size=3 align=1
+   base size=3 base align=1
+<anonymous struct> (0x0x41924188) 0
+
+Class String
+   size=6 align=1
+   base size=6 base align=1
+String (0x0x419241c0) 0
+
+Class StringSumHelper
+   size=6 align=1
+   base size=6 base align=1
+StringSumHelper (0x0x41955ac8) 0
+  String (0x0x41924230) 0
+
+Class __file
+   size=14 align=1
+   base size=14 base align=1
+__file (0x0x41924268) 0
+
+Vtable for Printable
+Printable::_ZTV9Printable: 3u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+
+Class Printable
+   size=2 align=1
+   base size=2 base align=1
+Printable (0x0x419242a0) 0 nearly-empty
+    vptr=((& Printable::_ZTV9Printable) + 4u)
+
+Vtable for Print
+Print::_ZTV5Print: 4u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+6     (int (*)(...))Print::write
+
+Class Print
+   size=4 align=1
+   base size=4 base align=1
+Print (0x0x419242d8) 0
+    vptr=((& Print::_ZTV5Print) + 4u)
+
+Class Stream::MultiTarget
+   size=6 align=1
+   base size=6 base align=1
+Stream::MultiTarget (0x0x41924348) 0
+
+Vtable for Stream
+Stream::_ZTV6Stream: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+6     (int (*)(...))Print::write
+8     (int (*)(...))__cxa_pure_virtual
+10    (int (*)(...))__cxa_pure_virtual
+12    (int (*)(...))__cxa_pure_virtual
+14    (int (*)(...))__cxa_pure_virtual
+
+Class Stream
+   size=12 align=1
+   base size=12 base align=1
+Stream (0x0x419aa6cc) 0
+    vptr=((& Stream::_ZTV6Stream) + 4u)
+  Print (0x0x41924310) 0
+      primary-for Stream (0x0x419aa6cc)
+
+Vtable for HardwareSerial
+HardwareSerial::_ZTV14HardwareSerial: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))HardwareSerial::write
+6     (int (*)(...))Print::write
+8     (int (*)(...))HardwareSerial::available
+10    (int (*)(...))HardwareSerial::read
+12    (int (*)(...))HardwareSerial::peek
+14    (int (*)(...))HardwareSerial::flush
+
+Class HardwareSerial
+   size=157 align=1
+   base size=157 base align=1
+HardwareSerial (0x0x419aabb8) 0
+    vptr=((& HardwareSerial::_ZTV14HardwareSerial) + 4u)
+  Stream (0x0x419aabf4) 0
+      primary-for HardwareSerial (0x0x419aabb8)
+    Print (0x0x41924380) 0
+        primary-for Stream (0x0x419aabf4)
+
+Class <anonymous struct>
+   size=12 align=1
+   base size=12 base align=1
+<anonymous struct> (0x0x419243b8) 0
+
+Class <anonymous struct>
+   size=18 align=1
+   base size=18 base align=1
+<anonymous struct> (0x0x419243f0) 0
+
+Class <anonymous struct>
+   size=9 align=1
+   base size=9 base align=1
+<anonymous struct> (0x0x41924428) 0
+
+Class <anonymous struct>
+   size=9 align=1
+   base size=9 base align=1
+<anonymous struct> (0x0x41924460) 0
+
+Class <anonymous struct>
+   size=7 align=1
+   base size=7 base align=1
+<anonymous struct> (0x0x41924498) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x419244d0) 0
+
+Class <anonymous struct>
+   size=5 align=1
+   base size=5 base align=1
+<anonymous struct> (0x0x41924508) 0
+
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x41924540) 0
+
+Class <anonymous struct>
+   size=5 align=1
+   base size=5 base align=1
+<anonymous struct> (0x0x41924578) 0
+
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x419245b0) 0
+
+Class <anonymous struct>
+   size=66 align=1
+   base size=66 base align=1
+<anonymous struct> (0x0x419245e8) 0
+
+Class <anonymous struct>
+   size=23 align=1
+   base size=23 base align=1
+<anonymous struct> (0x0x41924620) 0
+
+Class <anonymous struct>
+   size=9 align=1
+   base size=9 base align=1
+<anonymous struct> (0x0x41924658) 0
+
+Class <anonymous struct>
+   size=25 align=1
+   base size=25 base align=1
+<anonymous struct> (0x0x41924690) 0
+
+Class USBDevice_
+   size=1 align=1
+   base size=0 base align=1
+USBDevice_ (0x0x419246c8) 0 empty
+
+Vtable for Serial_
+Serial_::_ZTV7Serial_: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))Serial_::write
+6     (int (*)(...))Serial_::write
+8     (int (*)(...))Serial_::available
+10    (int (*)(...))Serial_::read
+12    (int (*)(...))Serial_::peek
+14    (int (*)(...))Serial_::flush
+
+Class Serial_
+   size=80 align=1
+   base size=80 base align=1
+Serial_ (0x0x419db4b0) 0
+    vptr=((& Serial_::_ZTV7Serial_) + 4u)
+  Stream (0x0x419db4ec) 0
+      primary-for Serial_ (0x0x419db4b0)
+    Print (0x0x41924700) 0
+        primary-for Stream (0x0x419db4ec)
+
+Class Mouse_
+   size=1 align=1
+   base size=1 base align=1
+Mouse_ (0x0x41924738) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x41924770) 0
+
+Vtable for Keyboard_
+Keyboard_::_ZTV9Keyboard_: 7u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))Keyboard_::write
+6     (int (*)(...))Print::write
+8     (int (*)(...))Keyboard_::press
+10    (int (*)(...))Keyboard_::release
+12    (int (*)(...))Keyboard_::releaseAll
+
+Class Keyboard_
+   size=12 align=1
+   base size=12 base align=1
+Keyboard_ (0x0x419db6cc) 0
+    vptr=((& Keyboard_::_ZTV9Keyboard_) + 4u)
+  Print (0x0x419247a8) 0
+      primary-for Keyboard_ (0x0x419db6cc)
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x419247e0) 0
+
+Class BridgeClass
+   size=9 align=1
+   base size=9 base align=1
+BridgeClass (0x0x41924818) 0
+
+Class SerialBridgeClass
+   size=11 align=1
+   base size=11 base align=1
+SerialBridgeClass (0x0x419db99c) 0
+  BridgeClass (0x0x41924888) 0
+
+Vtable for Process
+Process::_ZTV7Process: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))Process::write
+6     (int (*)(...))Print::write
+8     (int (*)(...))Process::available
+10    (int (*)(...))Process::read
+12    (int (*)(...))Process::peek
+14    (int (*)(...))Process::flush
+
+Class Process
+   size=85 align=1
+   base size=85 base align=1
+Process (0x0x419dbb7c) 0
+    vptr=((& Process::_ZTV7Process) + 4u)
+  Stream (0x0x419dbbb8) 0
+      primary-for Process (0x0x419dbb7c)
+    Print (0x0x419248c0) 0
+        primary-for Stream (0x0x419dbbb8)
+
+Vtable for ConsoleClass
+ConsoleClass::_ZTV12ConsoleClass: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))ConsoleClass::write
+6     (int (*)(...))ConsoleClass::write
+8     (int (*)(...))ConsoleClass::available
+10    (int (*)(...))ConsoleClass::read
+12    (int (*)(...))ConsoleClass::peek
+14    (int (*)(...))ConsoleClass::flush
+
+Class ConsoleClass
+   size=23 align=1
+   base size=23 base align=1
+ConsoleClass (0x0x419dbd20) 0
+    vptr=((& ConsoleClass::_ZTV12ConsoleClass) + 4u)
+  Stream (0x0x419dbd5c) 0
+      primary-for ConsoleClass (0x0x419dbd20)
+    Print (0x0x419248f8) 0
+        primary-for Stream (0x0x419dbd5c)
+
+Vtable for Server
+Server::_ZTV6Server: 5u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+6     (int (*)(...))Print::write
+8     (int (*)(...))__cxa_pure_virtual
+
+Class Server
+   size=4 align=1
+   base size=4 base align=1
+Server (0x0x419dbe10) 0
+    vptr=((& Server::_ZTV6Server) + 4u)
+  Print (0x0x41924930) 0
+      primary-for Server (0x0x419dbe10)
+
+Vtable for YunServer
+YunServer::_ZTV9YunServer: 5u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))YunServer::write
+6     (int (*)(...))Print::write
+8     (int (*)(...))YunServer::begin
+
+Class YunServer
+   size=10 align=1
+   base size=10 base align=1
+YunServer (0x0x419dbe88) 0
+    vptr=((& YunServer::_ZTV9YunServer) + 4u)
+  Server (0x0x419dbec4) 0
+      primary-for YunServer (0x0x419dbe88)
+    Print (0x0x41924968) 0
+        primary-for Server (0x0x419dbec4)
+
+Class IPAddress::<anonymous union>
+   size=4 align=1
+   base size=4 base align=1
+IPAddress::<anonymous union> (0x0x419249d8) 0
+
+Vtable for IPAddress
+IPAddress::_ZTV9IPAddress: 3u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))IPAddress::printTo
+
+Class IPAddress
+   size=6 align=1
+   base size=6 base align=1
+IPAddress (0x0x419dbfb4) 0
+    vptr=((& IPAddress::_ZTV9IPAddress) + 4u)
+  Printable (0x0x419249a0) 0 nearly-empty
+      primary-for IPAddress (0x0x419dbfb4)
+
+Vtable for Client
+Client::_ZTV6Client: 14u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+6     (int (*)(...))__cxa_pure_virtual
+8     (int (*)(...))__cxa_pure_virtual
+10    (int (*)(...))__cxa_pure_virtual
+12    (int (*)(...))__cxa_pure_virtual
+14    (int (*)(...))__cxa_pure_virtual
+16    (int (*)(...))__cxa_pure_virtual
+18    (int (*)(...))__cxa_pure_virtual
+20    (int (*)(...))__cxa_pure_virtual
+22    (int (*)(...))__cxa_pure_virtual
+24    (int (*)(...))__cxa_pure_virtual
+26    (int (*)(...))__cxa_pure_virtual
+
+Class Client
+   size=12 align=1
+   base size=12 base align=1
+Client (0x0xb20348) 0
+    vptr=((& Client::_ZTV6Client) + 4u)
+  Stream (0x0xb20384) 0
+      primary-for Client (0x0xb20348)
+    Print (0x0x41924a48) 0
+        primary-for Stream (0x0xb20384)
+
+Vtable for YunClient
+YunClient::_ZTV9YunClient: 14u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))YunClient::write
+6     (int (*)(...))YunClient::write
+8     (int (*)(...))YunClient::available
+10    (int (*)(...))YunClient::read
+12    (int (*)(...))YunClient::peek
+14    (int (*)(...))YunClient::flush
+16    (int (*)(...))YunClient::connect
+18    (int (*)(...))YunClient::connect
+20    (int (*)(...))YunClient::read
+22    (int (*)(...))YunClient::stop
+24    (int (*)(...))YunClient::connected
+26    (int (*)(...))YunClient::operator bool
+
+Class YunClient
+   size=83 align=1
+   base size=83 base align=1
+YunClient (0x0xb20474) 0
+    vptr=((& YunClient::_ZTV9YunClient) + 4u)
+  Client (0x0xb204b0) 0
+      primary-for YunClient (0x0xb20474)
+    Stream (0x0xb204ec) 0
+        primary-for Client (0x0xb204b0)
+      Print (0x0x41924a80) 0
+          primary-for Stream (0x0xb204ec)
+

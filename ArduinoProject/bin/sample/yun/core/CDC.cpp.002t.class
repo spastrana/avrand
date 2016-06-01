@@ -1,0 +1,235 @@
+Class <anonymous struct>
+   size=3 align=1
+   base size=3 base align=1
+<anonymous struct> (0x0x41929188) 0
+
+Class <anonymous struct>
+   size=12 align=1
+   base size=12 base align=1
+<anonymous struct> (0x0x419291c0) 0
+
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x419291f8) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x41929230) 0
+
+Class String
+   size=6 align=1
+   base size=6 base align=1
+String (0x0x41929268) 0
+
+Class StringSumHelper
+   size=6 align=1
+   base size=6 base align=1
+StringSumHelper (0x0x4195fd5c) 0
+  String (0x0x419292d8) 0
+
+Class __file
+   size=14 align=1
+   base size=14 base align=1
+__file (0x0x41929310) 0
+
+Vtable for Printable
+Printable::_ZTV9Printable: 3u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+
+Class Printable
+   size=2 align=1
+   base size=2 base align=1
+Printable (0x0x41929348) 0 nearly-empty
+    vptr=((& Printable::_ZTV9Printable) + 4u)
+
+Vtable for Print
+Print::_ZTV5Print: 4u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+6     (int (*)(...))Print::write
+
+Class Print
+   size=4 align=1
+   base size=4 base align=1
+Print (0x0x41929380) 0
+    vptr=((& Print::_ZTV5Print) + 4u)
+
+Class Stream::MultiTarget
+   size=6 align=1
+   base size=6 base align=1
+Stream::MultiTarget (0x0x419293f0) 0
+
+Vtable for Stream
+Stream::_ZTV6Stream: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))__cxa_pure_virtual
+6     (int (*)(...))Print::write
+8     (int (*)(...))__cxa_pure_virtual
+10    (int (*)(...))__cxa_pure_virtual
+12    (int (*)(...))__cxa_pure_virtual
+14    (int (*)(...))__cxa_pure_virtual
+
+Class Stream
+   size=12 align=1
+   base size=12 base align=1
+Stream (0x0x419b0960) 0
+    vptr=((& Stream::_ZTV6Stream) + 4u)
+  Print (0x0x419293b8) 0
+      primary-for Stream (0x0x419b0960)
+
+Vtable for HardwareSerial
+HardwareSerial::_ZTV14HardwareSerial: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))HardwareSerial::write
+6     (int (*)(...))Print::write
+8     (int (*)(...))HardwareSerial::available
+10    (int (*)(...))HardwareSerial::read
+12    (int (*)(...))HardwareSerial::peek
+14    (int (*)(...))HardwareSerial::flush
+
+Class HardwareSerial
+   size=157 align=1
+   base size=157 base align=1
+HardwareSerial (0x0x419b0e4c) 0
+    vptr=((& HardwareSerial::_ZTV14HardwareSerial) + 4u)
+  Stream (0x0x419b0e88) 0
+      primary-for HardwareSerial (0x0x419b0e4c)
+    Print (0x0x41929428) 0
+        primary-for Stream (0x0x419b0e88)
+
+Class <anonymous struct>
+   size=18 align=1
+   base size=18 base align=1
+<anonymous struct> (0x0x41929460) 0
+
+Class <anonymous struct>
+   size=9 align=1
+   base size=9 base align=1
+<anonymous struct> (0x0x41929498) 0
+
+Class <anonymous struct>
+   size=9 align=1
+   base size=9 base align=1
+<anonymous struct> (0x0x419294d0) 0
+
+Class <anonymous struct>
+   size=7 align=1
+   base size=7 base align=1
+<anonymous struct> (0x0x41929508) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x41929540) 0
+
+Class <anonymous struct>
+   size=5 align=1
+   base size=5 base align=1
+<anonymous struct> (0x0x41929578) 0
+
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x419295b0) 0
+
+Class <anonymous struct>
+   size=5 align=1
+   base size=5 base align=1
+<anonymous struct> (0x0x419295e8) 0
+
+Class <anonymous struct>
+   size=4 align=1
+   base size=4 base align=1
+<anonymous struct> (0x0x41929620) 0
+
+Class <anonymous struct>
+   size=66 align=1
+   base size=66 base align=1
+<anonymous struct> (0x0x41929658) 0
+
+Class <anonymous struct>
+   size=23 align=1
+   base size=23 base align=1
+<anonymous struct> (0x0x41929690) 0
+
+Class <anonymous struct>
+   size=9 align=1
+   base size=9 base align=1
+<anonymous struct> (0x0x419296c8) 0
+
+Class <anonymous struct>
+   size=25 align=1
+   base size=25 base align=1
+<anonymous struct> (0x0x41929700) 0
+
+Class USBDevice_
+   size=1 align=1
+   base size=0 base align=1
+USBDevice_ (0x0x41929738) 0 empty
+
+Vtable for Serial_
+Serial_::_ZTV7Serial_: 8u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))Serial_::write
+6     (int (*)(...))Serial_::write
+8     (int (*)(...))Serial_::available
+10    (int (*)(...))Serial_::read
+12    (int (*)(...))Serial_::peek
+14    (int (*)(...))Serial_::flush
+
+Class Serial_
+   size=80 align=1
+   base size=80 base align=1
+Serial_ (0x0x419dd4b0) 0
+    vptr=((& Serial_::_ZTV7Serial_) + 4u)
+  Stream (0x0x419dd4ec) 0
+      primary-for Serial_ (0x0x419dd4b0)
+    Print (0x0x41929770) 0
+        primary-for Stream (0x0x419dd4ec)
+
+Class Mouse_
+   size=1 align=1
+   base size=1 base align=1
+Mouse_ (0x0x419297a8) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x419297e0) 0
+
+Vtable for Keyboard_
+Keyboard_::_ZTV9Keyboard_: 7u entries
+0     (int (*)(...))0
+2     (int (*)(...))0
+4     (int (*)(...))Keyboard_::write
+6     (int (*)(...))Print::write
+8     (int (*)(...))Keyboard_::press
+10    (int (*)(...))Keyboard_::release
+12    (int (*)(...))Keyboard_::releaseAll
+
+Class Keyboard_
+   size=12 align=1
+   base size=12 base align=1
+Keyboard_ (0x0x419dd6cc) 0
+    vptr=((& Keyboard_::_ZTV9Keyboard_) + 4u)
+  Print (0x0x41929818) 0
+      primary-for Keyboard_ (0x0x419dd6cc)
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x41929850) 0
+
+Class <anonymous struct>
+   size=8 align=1
+   base size=8 base align=1
+<anonymous struct> (0x0x41929888) 0
+

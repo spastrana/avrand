@@ -1,0 +1,1288 @@
+   1               		.file	"TWI_AVR8.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__RAMPZ__ = 0x3b
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.text
+   9               	.Ltext0:
+  10               		.cfi_sections	.debug_frame
+  11               		.section	.text.TWI_StartTransmission,"ax",@progbits
+  12               	.global	TWI_StartTransmission
+  14               	TWI_StartTransmission:
+  15               	.LFB20:
+  16               		.file 1 "../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c"
+   1:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** /*
+   2:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****              LUFA Library
+   3:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****      Copyright (C) Dean Camera, 2011.
+   4:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+   5:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   dean [at] fourwalledcubicle [dot] com
+   6:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****            www.lufa-lib.org
+   7:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** */
+   8:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+   9:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** /*
+  10:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  11:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  12:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   Permission to use, copy, modify, distribute, and sell this
+  13:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   software and its documentation for any purpose is hereby granted
+  14:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   without fee, provided that the above copyright notice appear in
+  15:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   all copies and that both that the copyright notice and this
+  16:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   permission notice and warranty disclaimer appear in supporting
+  17:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   documentation, and that the name of the author not be used in
+  18:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   advertising or publicity pertaining to distribution of the
+  19:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   software without specific, written prior permission.
+  20:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  21:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   The author disclaim all warranties with regard to this
+  22:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   software, including all implied warranties of merchantability
+  23:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   and fitness.  In no event shall the author be liable for any
+  24:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   special, indirect or consequential damages or any damages
+  25:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   whatsoever resulting from loss of use, data or profits, whether
+  26:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   in an action of contract, negligence or other tortious action,
+  27:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   arising out of or in connection with the use or performance of
+  28:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****   this software.
+  29:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** */
+  30:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  31:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** #define  __INCLUDE_FROM_TWI_C
+  32:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** #include "../TWI.h"
+  33:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  34:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** uint8_t TWI_StartTransmission(const uint8_t SlaveAddress,
+  35:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                               const uint8_t TimeoutMS)
+  36:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** {
+  17               		.loc 1 36 0
+  18               		.cfi_startproc
+  19               	.LVL0:
+  20               	/* prologue: function */
+  21               	/* frame size = 0 */
+  22               	/* stack size = 0 */
+  23               	.L__stack_usage = 0
+  24               	.LBB11:
+  37:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	for (;;)
+  38:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	{
+  39:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		bool     BusCaptured = false;
+  40:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		uint16_t TimeoutRemaining;
+  41:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  42:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		TWCR = ((1 << TWINT) | (1 << TWSTA) | (1 << TWEN));
+  25               		.loc 1 42 0
+  26 0000 94EA      		ldi r25,lo8(-92)
+  27 0002 9093 BC00 		sts 188,r25
+  28               	.LVL1:
+  43:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  44:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		TimeoutRemaining = (TimeoutMS * 100);
+  29               		.loc 1 44 0
+  30 0006 24E6      		ldi r18,lo8(100)
+  31 0008 629F      		mul r22,r18
+  32 000a B001      		movw r22,r0
+  33 000c 1124      		clr __zero_reg__
+  34               	.LVL2:
+  35 000e 6150      		subi r22,1
+  36 0010 7109      		sbc r23,__zero_reg__
+  45:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		while (TimeoutRemaining-- && !(BusCaptured))
+  37               		.loc 1 45 0
+  38 0012 9B01      		movw r18,r22
+  39:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		uint16_t TimeoutRemaining;
+  39               		.loc 1 39 0
+  40 0014 40E0      		ldi r20,0
+  46:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+  47:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			if (TWCR & (1 << TWINT))
+  48:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			{
+  49:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				switch (TWSR & TW_STATUS_MASK)
+  50:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				{
+  51:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					case TW_START:
+  52:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					case TW_REP_START:
+  53:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						BusCaptured = true;
+  54:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						break;
+  55:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					case TW_MT_ARB_LOST:
+  56:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						TWCR = ((1 << TWINT) | (1 << TWSTA) | (1 << TWEN));
+  41               		.loc 1 56 0
+  42 0016 54EA      		ldi r21,lo8(-92)
+  43               	.LVL3:
+  44               	.L2:
+  45:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+  45               		.loc 1 45 0 discriminator 1
+  46 0018 2F3F      		cpi r18,-1
+  47 001a 9FEF      		ldi r25,-1
+  48 001c 3907      		cpc r19,r25
+  49 001e 01F0      		breq .L8
+  45:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+  50               		.loc 1 45 0 is_stmt 0 discriminator 2
+  51 0020 4111      		cpse r20,__zero_reg__
+  52 0022 00C0      		rjmp .L35
+  47:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			{
+  53               		.loc 1 47 0 is_stmt 1
+  54 0024 9091 BC00 		lds r25,188
+  55 0028 97FF      		sbrs r25,7
+  56 002a 00C0      		rjmp .L3
+  49:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				{
+  57               		.loc 1 49 0
+  58 002c 9091 B900 		lds r25,185
+  59 0030 987F      		andi r25,lo8(-8)
+  60 0032 9031      		cpi r25,lo8(16)
+  61 0034 01F0      		breq .L15
+  62 0036 9833      		cpi r25,lo8(56)
+  63 0038 01F0      		breq .L5
+  64 003a 9830      		cpi r25,lo8(8)
+  65 003c 01F0      		breq .L15
+  57:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						continue;
+  58:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					default:
+  59:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						TWCR = (1 << TWEN);
+  66               		.loc 1 59 0
+  67 003e 84E0      		ldi r24,lo8(4)
+  68               	.LVL4:
+  69 0040 8093 BC00 		sts 188,r24
+  60:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						return TWI_ERROR_BusFault;
+  70               		.loc 1 60 0
+  71 0044 81E0      		ldi r24,lo8(1)
+  72 0046 0895      		ret
+  73               	.LVL5:
+  74               	.L5:
+  56:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						continue;
+  75               		.loc 1 56 0
+  76 0048 5093 BC00 		sts 188,r21
+  57:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						continue;
+  77               		.loc 1 57 0
+  78 004c 00C0      		rjmp .L6
+  79               	.L15:
+  53:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 						break;
+  80               		.loc 1 53 0
+  81 004e 41E0      		ldi r20,lo8(1)
+  82               	.LVL6:
+  83               	.L3:
+  84               	.LBB12:
+  85               	.LBB13:
+  86               		.file 2 "/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/del
+   1:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /* Copyright (c) 2002, Marek Michalkiewicz
+   2:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Copyright (c) 2004,2005,2007 Joerg Wunsch
+   3:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Copyright (c) 2007  Florin-Viorel Petrov
+   4:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    All rights reserved.
+   5:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+   6:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Redistribution and use in source and binary forms, with or without
+   7:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    modification, are permitted provided that the following conditions are met:
+   8:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+   9:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    * Redistributions of source code must retain the above copyright
+  10:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****      notice, this list of conditions and the following disclaimer.
+  11:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  12:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    * Redistributions in binary form must reproduce the above copyright
+  13:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****      notice, this list of conditions and the following disclaimer in
+  14:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****      the documentation and/or other materials provided with the
+  15:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****      distribution.
+  16:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  17:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    * Neither the name of the copyright holders nor the names of
+  18:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****      contributors may be used to endorse or promote products derived
+  19:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****      from this software without specific prior written permission.
+  20:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  21:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+  22:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  23:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+  24:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  25:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+  26:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+  27:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+  28:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+  29:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+  30:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+  31:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   POSSIBILITY OF SUCH DAMAGE. */
+  32:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  33:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /* $Id$ */
+  34:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  35:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #ifndef _UTIL_DELAY_H_
+  36:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #define _UTIL_DELAY_H_ 1
+  37:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  38:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #ifndef __HAS_DELAY_CYCLES
+  39:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #define __HAS_DELAY_CYCLES 1
+  40:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #endif
+  41:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  42:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #include <inttypes.h>
+  43:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #include <util/delay_basic.h>
+  44:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #include <math.h>
+  45:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  46:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /** \file */
+  47:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /** \defgroup util_delay <util/delay.h>: Convenience functions for busy-wait delay loops
+  48:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     \code
+  49:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     #define F_CPU 1000000UL  // 1 MHz
+  50:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     //#define F_CPU 14.7456E6
+  51:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     #include <util/delay.h>
+  52:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     \endcode
+  53:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  54:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     \note As an alternative method, it is possible to pass the
+  55:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     F_CPU macro down to the compiler from the Makefile.
+  56:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     Obviously, in that case, no \c \#define statement should be
+  57:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     used.
+  58:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  59:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     The functions in this header file are wrappers around the basic
+  60:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     busy-wait functions from <util/delay_basic.h>.  They are meant as
+  61:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     convenience functions where actual time values can be specified
+  62:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     rather than a number of cycles to wait for.  The idea behind is
+  63:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     that compile-time constant expressions will be eliminated by
+  64:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     compiler optimization so floating-point expressions can be used
+  65:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     to calculate the number of delay cycles needed based on the CPU
+  66:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     frequency passed by the macro F_CPU.
+  67:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  68:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     \note In order for these functions to work as intended, compiler
+  69:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     optimizations <em>must</em> be enabled, and the delay time
+  70:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     <em>must</em> be an expression that is a known constant at
+  71:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     compile-time.  If these requirements are not met, the resulting
+  72:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     delay will be much longer (and basically unpredictable), and
+  73:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     applications that otherwise do not use floating-point calculations
+  74:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     will experience severe code bloat by the floating-point library
+  75:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     routines linked into the application.
+  76:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  77:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     The functions available allow the specification of microsecond, and
+  78:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     millisecond delays directly, using the application-supplied macro
+  79:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     F_CPU as the CPU clock frequency (in Hertz).
+  80:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  81:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** */
+  82:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  83:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #if !defined(__DOXYGEN__)
+  84:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** static inline void _delay_us(double __us) __attribute__((always_inline));
+  85:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** static inline void _delay_ms(double __ms) __attribute__((always_inline));
+  86:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #endif
+  87:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  88:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #ifndef F_CPU
+  89:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /* prevent compiler error by supplying a default */
+  90:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** # warning "F_CPU not defined for <util/delay.h>"
+  91:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** # define F_CPU 1000000UL
+  92:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #endif
+  93:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  94:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #ifndef __OPTIMIZE__
+  95:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** # warning "Compiler optimizations disabled; functions from <util/delay.h> won't work as designed"
+  96:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #endif
+  97:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+  98:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+  99:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+ 100:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   __STDC_HOSTED__
+ 101:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #  include <math.h>
+ 102:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #endif
+ 103:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 104:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /**
+ 105:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    \ingroup util_delay
+ 106:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 107:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Perform a delay of \c __ms milliseconds, using _delay_loop_2().
+ 108:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 109:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    The macro F_CPU is supposed to be defined to a
+ 110:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    constant defining the CPU clock frequency (in Hertz).
+ 111:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 112:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    The maximal possible delay is 262.14 ms / F_CPU in MHz.
+ 113:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 114:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    When the user request delay which exceed the maximum possible one,
+ 115:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    _delay_ms() provides a decreased resolution functionality. In this
+ 116:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    mode _delay_ms() will work with a resolution of 1/10 ms, providing
+ 117:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    delays up to 6.5535 seconds (independent from CPU frequency).  The
+ 118:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    user will not be informed about decreased resolution.
+ 119:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 120:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    If the avr-gcc toolchain has __builtin_avr_delay_cycles(unsigned long)
+ 121:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    support, maximal possible delay is 4294967.295 ms/ F_CPU in MHz. For
+ 122:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    values greater than the maximal possible delay, overflows results in
+ 123:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    no delay i.e., 0ms.
+ 124:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 125:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Conversion of __us into clock cycles may not always result in integer.
+ 126:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    By default, the clock cycles rounded up to next integer. This ensures that
+ 127:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    the user gets atleast __us microseconds of delay.
+ 128:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 129:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Alternatively, user can define __DELAY_ROUND_DOWN__ and __DELAY_ROUND_CLOSEST__
+ 130:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    to round down and round to closest integer.
+ 131:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 132:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Note: The new implementation of _delay_ms(double __ms) with 
+ 133:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     __builtin_avr_delay_cycles(unsigned long) support is not backward compatible. 
+ 134:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay.
+ 135:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Also, the backward compatible
+ 136:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    algorithm will be chosen if the code is compiled in a <em>freestanding
+ 137:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    environment</em> (GCC option \c -ffreestanding), as the math functions
+ 138:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    required for rounding are not available to the compiler then.
+ 139:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 140:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****  */
+ 141:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** void
+ 142:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** _delay_ms(double __ms)
+ 143:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** {
+ 144:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	double __tmp ; 
+ 145:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+ 146:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+ 147:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   __STDC_HOSTED__
+ 148:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	uint32_t __ticks_dc;
+ 149:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
+ 150:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e3) * __ms;
+ 151:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 152:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
+ 153:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)fabs(__tmp);
+ 154:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 155:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#elif defined(__DELAY_ROUND_CLOSEST__)
+ 156:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(fabs(__tmp)+0.5);
+ 157:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 158:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#else
+ 159:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		//round up by default
+ 160:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+ 161:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#endif
+ 162:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 163:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	__builtin_avr_delay_cycles(__ticks_dc);
+ 164:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 165:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #else
+ 166:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	uint16_t __ticks;
+ 167:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 4e3) * __ms;
+ 168:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	if (__tmp < 1.0)
+ 169:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks = 1;
+ 170:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	else if (__tmp > 65535)
+ 171:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	{
+ 172:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		//	__ticks = requested delay in 1/10 ms
+ 173:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks = (uint16_t) (__ms * 10.0);
+ 174:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		while(__ticks)
+ 175:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		{
+ 176:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 			// wait 1/10 ms
+ 177:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 			_delay_loop_2(((F_CPU) / 4e3) / 10);
+ 178:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 			__ticks --;
+ 179:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		}
+ 180:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		return;
+ 181:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	}
+ 182:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	else
+ 183:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks = (uint16_t)__tmp;
+ 184:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	_delay_loop_2(__ticks);
+ 185:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #endif
+ 186:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** }
+ 187:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 188:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** /**
+ 189:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    \ingroup util_delay
+ 190:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 191:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Perform a delay of \c __us microseconds, using _delay_loop_1().
+ 192:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 193:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    The macro F_CPU is supposed to be defined to a
+ 194:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    constant defining the CPU clock frequency (in Hertz).
+ 195:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 196:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    The maximal possible delay is 768 us / F_CPU in MHz.
+ 197:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 198:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    If the user requests a delay greater than the maximal possible one,
+ 199:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    _delay_us() will automatically call _delay_ms() instead.  The user
+ 200:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    will not be informed about this case.
+ 201:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 202:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    If the avr-gcc toolchain has __builtin_avr_delay_cycles(unsigned long)
+ 203:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    support, maximal possible delay is 4294967.295 us/ F_CPU in MHz. For
+ 204:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    values greater than the maximal possible delay, overflow results in
+ 205:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    no delay i.e., 0us.
+ 206:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   
+ 207:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Conversion of __us into clock cycles may not always result in integer.
+ 208:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    By default, the clock cycles rounded up to next integer. This ensures that
+ 209:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    the user gets atleast __us microseconds of delay.
+ 210:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 211:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Alternatively, user can define __DELAY_ROUND_DOWN__ and __DELAY_ROUND_CLOSEST__
+ 212:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    to round down and round to closest integer.
+ 213:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****  
+ 214:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Note: The new implementation of _delay_us(double __us) with 
+ 215:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****     __builtin_avr_delay_cycles(unsigned long) support is not backward compatible.
+ 216:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    User can define __DELAY_BACKWARD_COMPATIBLE__ to get a backward compatible delay.
+ 217:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    Also, the backward compatible
+ 218:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    algorithm will be chosen if the code is compiled in a <em>freestanding
+ 219:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    environment</em> (GCC option \c -ffreestanding), as the math functions
+ 220:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****    required for rounding are not available to the compiler then.
+ 221:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 222:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****  */
+ 223:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** void
+ 224:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** _delay_us(double __us)
+ 225:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** {
+ 226:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	double __tmp ; 
+ 227:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** #if __HAS_DELAY_CYCLES && defined(__OPTIMIZE__) && \
+ 228:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   !defined(__DELAY_BACKWARD_COMPATIBLE__) &&	   \
+ 229:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h ****   __STDC_HOSTED__
+ 230:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	uint32_t __ticks_dc;
+ 231:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	extern void __builtin_avr_delay_cycles(unsigned long);
+ 232:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	__tmp = ((F_CPU) / 1e6) * __us;
+ 233:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 234:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#if defined(__DELAY_ROUND_DOWN__)
+ 235:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)fabs(__tmp);
+ 236:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 237:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#elif defined(__DELAY_ROUND_CLOSEST__)
+ 238:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(fabs(__tmp)+0.5);
+ 239:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 240:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#else
+ 241:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		//round up by default
+ 242:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+ 243:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	#endif
+ 244:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 
+ 245:/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/util/delay.h **** 	__builtin_avr_delay_cycles(__ticks_dc);
+  87               		.loc 2 245 0
+  88 0050 9AE1      		ldi r25,lo8(26)
+  89 0052 9A95      		1: dec r25
+  90 0054 01F4      		brne 1b
+  91 0056 00C0      		rjmp .
+  92               	.LVL7:
+  93               	.L6:
+  94 0058 2150      		subi r18,1
+  95 005a 3109      		sbc r19,__zero_reg__
+  96               	.LVL8:
+  97 005c 00C0      		rjmp .L2
+  98               	.LVL9:
+  99               	.L35:
+ 100               	.LBE13:
+ 101               	.LBE12:
+  61:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				}
+  62:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			}
+  63:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  64:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			_delay_us(10);
+  65:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+  66:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  67:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		if (!(TimeoutRemaining))
+ 102               		.loc 1 67 0
+ 103 005e 232B      		or r18,r19
+ 104 0060 01F4      		brne .L8
+  68:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+  69:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			TWCR = (1 << TWEN);
+ 105               		.loc 1 69 0
+ 106 0062 84E0      		ldi r24,lo8(4)
+ 107               	.LVL10:
+ 108 0064 8093 BC00 		sts 188,r24
+  70:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			return TWI_ERROR_BusCaptureTimeout;
+ 109               		.loc 1 70 0
+ 110 0068 82E0      		ldi r24,lo8(2)
+ 111 006a 0895      		ret
+ 112               	.LVL11:
+ 113               	.L8:
+  71:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+  72:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  73:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		TWDR = SlaveAddress;
+ 114               		.loc 1 73 0
+ 115 006c 8093 BB00 		sts 187,r24
+  74:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		TWCR = ((1 << TWINT) | (1 << TWEN));
+ 116               		.loc 1 74 0
+ 117 0070 84E8      		ldi r24,lo8(-124)
+ 118               	.LVL12:
+ 119 0072 8093 BC00 		sts 188,r24
+ 120               	.LVL13:
+ 121               	.L10:
+  75:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  76:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		TimeoutRemaining = (TimeoutMS * 100);
+  77:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		while (TimeoutRemaining--)
+ 122               		.loc 1 77 0 discriminator 1
+ 123 0076 6F3F      		cpi r22,-1
+ 124 0078 8FEF      		ldi r24,-1
+ 125 007a 7807      		cpc r23,r24
+ 126 007c 01F0      		breq .L13
+  78:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+  79:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			if (TWCR & (1 << TWINT))
+ 127               		.loc 1 79 0
+ 128 007e 2091 BC00 		lds r18,188
+ 129 0082 CB01      		movw r24,r22
+ 130 0084 0197      		sbiw r24,1
+ 131 0086 27FD      		sbrc r18,7
+ 132 0088 00C0      		rjmp .L11
+ 133               	.LVL14:
+ 134               	.LBB14:
+ 135               	.LBB15:
+ 136               		.loc 2 245 0
+ 137 008a 2AE1      		ldi r18,lo8(26)
+ 138 008c 2A95      		1: dec r18
+ 139 008e 01F4      		brne 1b
+ 140 0090 00C0      		rjmp .
+ 141 0092 BC01      		movw r22,r24
+ 142               	.LVL15:
+ 143 0094 00C0      		rjmp .L10
+ 144               	.LVL16:
+ 145               	.L11:
+ 146               	.LBE15:
+ 147               	.LBE14:
+  80:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			  break;
+  81:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  82:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			_delay_us(10);
+  83:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+  84:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  85:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		if (!(TimeoutRemaining))
+ 148               		.loc 1 85 0
+ 149 0096 672B      		or r22,r23
+ 150 0098 01F0      		breq .L16
+ 151               	.L13:
+  86:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		  return TWI_ERROR_SlaveResponseTimeout;
+  87:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+  88:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		switch (TWSR & TW_STATUS_MASK)
+ 152               		.loc 1 88 0
+ 153 009a 8091 B900 		lds r24,185
+ 154 009e 887F      		andi r24,lo8(-8)
+ 155 00a0 8831      		cpi r24,lo8(24)
+ 156 00a2 01F0      		breq .L17
+ 157 00a4 8034      		cpi r24,lo8(64)
+ 158 00a6 01F0      		breq .L17
+  89:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+  90:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			case TW_MT_SLA_ACK:
+  91:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			case TW_MR_SLA_ACK:
+  92:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				return TWI_ERROR_NoError;
+  93:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			default:
+  94:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				TWCR = ((1 << TWINT) | (1 << TWSTO) | (1 << TWEN));
+ 159               		.loc 1 94 0
+ 160 00a8 84E9      		ldi r24,lo8(-108)
+ 161 00aa 8093 BC00 		sts 188,r24
+  95:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				return TWI_ERROR_SlaveNotReady;
+ 162               		.loc 1 95 0
+ 163 00ae 84E0      		ldi r24,lo8(4)
+ 164 00b0 0895      		ret
+ 165               	.L16:
+  86:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		  return TWI_ERROR_SlaveResponseTimeout;
+ 166               		.loc 1 86 0
+ 167 00b2 83E0      		ldi r24,lo8(3)
+ 168 00b4 0895      		ret
+ 169               	.L17:
+  92:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			default:
+ 170               		.loc 1 92 0
+ 171 00b6 80E0      		ldi r24,0
+ 172               	.LBE11:
+  96:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+  97:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	}
+  98:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** }
+ 173               		.loc 1 98 0
+ 174 00b8 0895      		ret
+ 175               		.cfi_endproc
+ 176               	.LFE20:
+ 178               		.section	.text.TWI_SendByte,"ax",@progbits
+ 179               	.global	TWI_SendByte
+ 181               	TWI_SendByte:
+ 182               	.LFB21:
+  99:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 100:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** bool TWI_SendByte(const uint8_t Byte)
+ 101:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** {
+ 183               		.loc 1 101 0
+ 184               		.cfi_startproc
+ 185               	.LVL17:
+ 186               	/* prologue: function */
+ 187               	/* frame size = 0 */
+ 188               	/* stack size = 0 */
+ 189               	.L__stack_usage = 0
+ 102:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	TWDR = Byte;
+ 190               		.loc 1 102 0
+ 191 0000 8093 BB00 		sts 187,r24
+ 103:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	TWCR = ((1 << TWINT) | (1 << TWEN));
+ 192               		.loc 1 103 0
+ 193 0004 84E8      		ldi r24,lo8(-124)
+ 194               	.LVL18:
+ 195 0006 8093 BC00 		sts 188,r24
+ 196               	.LVL19:
+ 197               	.L38:
+ 104:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	while (!(TWCR & (1 << TWINT)));
+ 198               		.loc 1 104 0 discriminator 1
+ 199 000a 8091 BC00 		lds r24,188
+ 200 000e 87FF      		sbrs r24,7
+ 201 0010 00C0      		rjmp .L38
+ 105:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 106:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	return ((TWSR & TW_STATUS_MASK) == TW_MT_DATA_ACK);
+ 202               		.loc 1 106 0
+ 203 0012 9091 B900 		lds r25,185
+ 204 0016 987F      		andi r25,lo8(-8)
+ 205 0018 81E0      		ldi r24,lo8(1)
+ 206 001a 9832      		cpi r25,lo8(40)
+ 207 001c 01F0      		breq .L39
+ 208 001e 80E0      		ldi r24,0
+ 209               	.L39:
+ 107:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** }
+ 210               		.loc 1 107 0
+ 211 0020 0895      		ret
+ 212               		.cfi_endproc
+ 213               	.LFE21:
+ 215               		.section	.text.TWI_ReceiveByte,"ax",@progbits
+ 216               	.global	TWI_ReceiveByte
+ 218               	TWI_ReceiveByte:
+ 219               	.LFB22:
+ 108:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 109:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** bool TWI_ReceiveByte(uint8_t* const Byte,
+ 110:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					 const bool LastByte)
+ 111:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** {
+ 220               		.loc 1 111 0
+ 221               		.cfi_startproc
+ 222               	.LVL20:
+ 223               	/* prologue: function */
+ 224               	/* frame size = 0 */
+ 225               	/* stack size = 0 */
+ 226               	.L__stack_usage = 0
+ 112:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	uint8_t TWCRMask;
+ 113:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 114:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	if (LastByte)
+ 227               		.loc 1 114 0
+ 228 0000 6623      		tst r22
+ 229 0002 01F0      		breq .L51
+ 115:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	  TWCRMask = ((1 << TWINT) | (1 << TWEN));
+ 230               		.loc 1 115 0
+ 231 0004 24E8      		ldi r18,lo8(-124)
+ 232 0006 00C0      		rjmp .L44
+ 233               	.L51:
+ 116:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	else
+ 117:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	  TWCRMask = ((1 << TWINT) | (1 << TWEN) | (1 << TWEA));
+ 234               		.loc 1 117 0
+ 235 0008 24EC      		ldi r18,lo8(-60)
+ 236               	.L44:
+ 237               	.LVL21:
+ 118:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 119:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	TWCR = TWCRMask;
+ 238               		.loc 1 119 0
+ 239 000a 2093 BC00 		sts 188,r18
+ 240               	.LVL22:
+ 241               	.L46:
+ 120:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	while (!(TWCR & (1 << TWINT)));
+ 242               		.loc 1 120 0 discriminator 1
+ 243 000e 2091 BC00 		lds r18,188
+ 244 0012 27FF      		sbrs r18,7
+ 245 0014 00C0      		rjmp .L46
+ 121:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	*Byte = TWDR;
+ 246               		.loc 1 121 0
+ 247 0016 2091 BB00 		lds r18,187
+ 248 001a FC01      		movw r30,r24
+ 249 001c 2083      		st Z,r18
+ 250               	.LVL23:
+ 122:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	
+ 123:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	uint8_t Status = (TWSR & TW_STATUS_MASK);
+ 251               		.loc 1 123 0
+ 252 001e 9091 B900 		lds r25,185
+ 253 0022 987F      		andi r25,lo8(-8)
+ 254               	.LVL24:
+ 124:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	
+ 125:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	return ((LastByte) ? (Status == TW_MR_DATA_NACK) : (Status == TW_MR_DATA_ACK));
+ 255               		.loc 1 125 0
+ 256 0024 81E0      		ldi r24,lo8(1)
+ 257               	.LVL25:
+ 258 0026 6623      		tst r22
+ 259 0028 01F0      		breq .L47
+ 260               		.loc 1 125 0 is_stmt 0 discriminator 1
+ 261 002a 9835      		cpi r25,lo8(88)
+ 262 002c 01F4      		brne .L58
+ 263 002e 00C0      		rjmp .L49
+ 264               	.L47:
+ 265               		.loc 1 125 0 discriminator 2
+ 266 0030 9035      		cpi r25,lo8(80)
+ 267 0032 01F0      		breq .L49
+ 268               	.L58:
+ 269 0034 80E0      		ldi r24,0
+ 270               	.L49:
+ 126:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** }
+ 271               		.loc 1 126 0 is_stmt 1 discriminator 3
+ 272 0036 0895      		ret
+ 273               		.cfi_endproc
+ 274               	.LFE22:
+ 276               		.section	.text.TWI_ReadPacket,"ax",@progbits
+ 277               	.global	TWI_ReadPacket
+ 279               	TWI_ReadPacket:
+ 280               	.LFB23:
+ 127:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 128:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** uint8_t TWI_ReadPacket(const uint8_t SlaveAddress,
+ 129:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                        const uint8_t TimeoutMS,
+ 130:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                        const uint8_t* InternalAddress,
+ 131:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                        uint8_t InternalAddressLen,
+ 132:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                        uint8_t* Buffer,
+ 133:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                        uint8_t Length)
+ 134:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** {
+ 281               		.loc 1 134 0
+ 282               		.cfi_startproc
+ 283               	.LVL26:
+ 284 0000 AF92      		push r10
+ 285               	.LCFI0:
+ 286               		.cfi_def_cfa_offset 3
+ 287               		.cfi_offset 10, -2
+ 288 0002 BF92      		push r11
+ 289               	.LCFI1:
+ 290               		.cfi_def_cfa_offset 4
+ 291               		.cfi_offset 11, -3
+ 292 0004 CF92      		push r12
+ 293               	.LCFI2:
+ 294               		.cfi_def_cfa_offset 5
+ 295               		.cfi_offset 12, -4
+ 296 0006 DF92      		push r13
+ 297               	.LCFI3:
+ 298               		.cfi_def_cfa_offset 6
+ 299               		.cfi_offset 13, -5
+ 300 0008 EF92      		push r14
+ 301               	.LCFI4:
+ 302               		.cfi_def_cfa_offset 7
+ 303               		.cfi_offset 14, -6
+ 304 000a FF92      		push r15
+ 305               	.LCFI5:
+ 306               		.cfi_def_cfa_offset 8
+ 307               		.cfi_offset 15, -7
+ 308 000c 0F93      		push r16
+ 309               	.LCFI6:
+ 310               		.cfi_def_cfa_offset 9
+ 311               		.cfi_offset 16, -8
+ 312 000e 1F93      		push r17
+ 313               	.LCFI7:
+ 314               		.cfi_def_cfa_offset 10
+ 315               		.cfi_offset 17, -9
+ 316 0010 CF93      		push r28
+ 317               	.LCFI8:
+ 318               		.cfi_def_cfa_offset 11
+ 319               		.cfi_offset 28, -10
+ 320 0012 DF93      		push r29
+ 321               	.LCFI9:
+ 322               		.cfi_def_cfa_offset 12
+ 323               		.cfi_offset 29, -11
+ 324 0014 00D0      		rcall .
+ 325 0016 1F92      		push __zero_reg__
+ 326               	.LCFI10:
+ 327               		.cfi_def_cfa_offset 15
+ 328 0018 CDB7      		in r28,__SP_L__
+ 329 001a DEB7      		in r29,__SP_H__
+ 330               	.LCFI11:
+ 331               		.cfi_def_cfa_register 28
+ 332               	/* prologue: function */
+ 333               	/* frame size = 3 */
+ 334               	/* stack size = 13 */
+ 335               	.L__stack_usage = 13
+ 336 001c D82E      		mov r13,r24
+ 337 001e C62E      		mov r12,r22
+ 135:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	uint8_t ErrorCode;
+ 136:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	
+ 137:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	if ((ErrorCode = TWI_StartTransmission((SlaveAddress & TWI_DEVICE_ADDRESS_MASK) | TWI_ADDRESS_WRIT
+ 338               		.loc 1 137 0
+ 339 0020 8E7F      		andi r24,lo8(-2)
+ 340               	.LVL27:
+ 341 0022 2983      		std Y+1,r18
+ 342 0024 4A83      		std Y+2,r20
+ 343 0026 5B83      		std Y+3,r21
+ 344 0028 0E94 0000 		call TWI_StartTransmission
+ 345               	.LVL28:
+ 346 002c F82E      		mov r15,r24
+ 347               	.LVL29:
+ 348 002e 2981      		ldd r18,Y+1
+ 349 0030 4A81      		ldd r20,Y+2
+ 350 0032 5B81      		ldd r21,Y+3
+ 351 0034 8111      		cpse r24,__zero_reg__
+ 352 0036 00C0      		rjmp .L60
+ 353 0038 5A01      		movw r10,r20
+ 354 003a F22E      		mov r15,r18
+ 355               	.LVL30:
+ 356 003c F40E      		add r15,r20
+ 357               	.LVL31:
+ 358               	.L61:
+ 138:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	                                       TimeoutMS)) == TWI_ERROR_NoError)
+ 139:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	{
+ 140:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		while (InternalAddressLen--)
+ 359               		.loc 1 140 0 discriminator 1
+ 360 003e FA14      		cp r15,r10
+ 361 0040 01F0      		breq .L65
+ 362               	.LVL32:
+ 141:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+ 142:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			if (!(TWI_SendByte(*(InternalAddress++))))
+ 363               		.loc 1 142 0
+ 364 0042 F501      		movw r30,r10
+ 365 0044 8191      		ld r24,Z+
+ 366               	.LVL33:
+ 367 0046 5F01      		movw r10,r30
+ 368               	.LVL34:
+ 369 0048 0E94 0000 		call TWI_SendByte
+ 370               	.LVL35:
+ 371 004c 8111      		cpse r24,__zero_reg__
+ 372 004e 00C0      		rjmp .L61
+ 373               	.LVL36:
+ 374               	.L65:
+ 143:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			{				
+ 144:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				ErrorCode = TWI_ERROR_SlaveNAK;
+ 145:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				break;
+ 146:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			}
+ 147:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+ 148:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		
+ 149:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		if ((ErrorCode = TWI_StartTransmission((SlaveAddress & TWI_DEVICE_ADDRESS_MASK) | TWI_ADDRESS_REA
+ 375               		.loc 1 149 0
+ 376 0050 6C2D      		mov r22,r12
+ 377 0052 8D2D      		mov r24,r13
+ 378 0054 8160      		ori r24,lo8(1)
+ 379 0056 0E94 0000 		call TWI_StartTransmission
+ 380               	.LVL37:
+ 381 005a F82E      		mov r15,r24
+ 382               	.LVL38:
+ 383 005c 8111      		cpse r24,__zero_reg__
+ 384 005e 00C0      		rjmp .L60
+ 385 0060 EA94      		dec r14
+ 386               	.LVL39:
+ 387               	.L66:
+ 150:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 											   TimeoutMS)) == TWI_ERROR_NoError)
+ 151:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+ 152:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			while (Length--)
+ 388               		.loc 1 152 0 discriminator 1
+ 389 0062 8FEF      		ldi r24,lo8(-1)
+ 390 0064 E816      		cp r14,r24
+ 391 0066 01F0      		breq .L68
+ 153:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			{
+ 154:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				if (!(TWI_ReceiveByte(Buffer++, (Length == 0))))
+ 392               		.loc 1 154 0
+ 393 0068 6801      		movw r12,r16
+ 394 006a FFEF      		ldi r31,-1
+ 395 006c CF1A      		sub r12,r31
+ 396 006e DF0A      		sbc r13,r31
+ 397               	.LVL40:
+ 398 0070 61E0      		ldi r22,lo8(1)
+ 399 0072 E110      		cpse r14,__zero_reg__
+ 400 0074 60E0      		ldi r22,0
+ 401               	.L67:
+ 402 0076 C801      		movw r24,r16
+ 403 0078 0E94 0000 		call TWI_ReceiveByte
+ 404               	.LVL41:
+ 405 007c EA94      		dec r14
+ 406               	.LVL42:
+ 407 007e 8823      		tst r24
+ 408 0080 01F0      		breq .L70
+ 409 0082 8601      		movw r16,r12
+ 410 0084 00C0      		rjmp .L66
+ 411               	.L70:
+ 155:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				{
+ 156:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					ErrorCode = TWI_ERROR_SlaveNAK;
+ 412               		.loc 1 156 0
+ 413 0086 85E0      		ldi r24,lo8(5)
+ 414 0088 F82E      		mov r15,r24
+ 415               	.LVL43:
+ 416               	.L68:
+ 417               	.LBB16:
+ 418               	.LBB17:
+ 419               		.file 3 "../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h"
+   1:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** /*
+   2:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****              LUFA Library
+   3:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****      Copyright (C) Dean Camera, 2011.
+   4:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+   5:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   dean [at] fourwalledcubicle [dot] com
+   6:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****            www.lufa-lib.org
+   7:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** */
+   8:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+   9:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** /*
+  10:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  11:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+  12:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   Permission to use, copy, modify, distribute, and sell this
+  13:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   software and its documentation for any purpose is hereby granted
+  14:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   without fee, provided that the above copyright notice appear in
+  15:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   all copies and that both that the copyright notice and this
+  16:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   permission notice and warranty disclaimer appear in supporting
+  17:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   documentation, and that the name of the author not be used in
+  18:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   advertising or publicity pertaining to distribution of the
+  19:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   software without specific, written prior permission.
+  20:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+  21:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   The author disclaim all warranties with regard to this
+  22:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   software, including all implied warranties of merchantability
+  23:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   and fitness.  In no event shall the author be liable for any
+  24:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   special, indirect or consequential damages or any damages
+  25:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   whatsoever resulting from loss of use, data or profits, whether
+  26:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   in an action of contract, negligence or other tortious action,
+  27:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   arising out of or in connection with the use or performance of
+  28:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****   this software.
+  29:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** */
+  30:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+  31:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** /** \file
+  32:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \brief TWI Peripheral Driver (AVR8)
+  33:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  34:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  On-chip TWI driver for the 8-bit AVR microcontrollers.
+  35:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  36:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \note This file should not be included directly. It is automatically included as needed by the 
+  37:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *        dispatch header located in LUFA/Drivers/Peripheral/TWI.h.
+  38:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  */
+  39:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+  40:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** /** \ingroup Group_TWI
+  41:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \defgroup Group_TWI_AVR8 TWI Peripheral Driver (AVR8)
+  42:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  43:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \section Sec_ModDescription Module Description
+  44:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  Master mode TWI driver for the 8-bit AVR microcontrollers which contain a hardware TWI module.
+  45:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  46:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \note This file should not be included directly. It is automatically included as needed by the 
+  47:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *        dispatch header located in LUFA/Drivers/Peripheral/TWI.h.
+  48:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  49:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \section Sec_ExampleUsage Example Usage
+  50:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  The following snippet is an example of how this module may be used within a typical
+  51:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  application.
+  52:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  53:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  <b>Low Level API Example:</b>
+  54:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \code
+  55:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      // Initialize the TWI driver before first use at 200KHz
+  56:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      TWI_Init(TWI_BIT_PRESCALE_1, TWI_BITLENGTH_FROM_FREQ(1, 200000));
+  57:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  58:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      // Start a write session to device at device address 0xA0, internal address 0xDC with a 10m
+  59:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      if (TWI_StartTransmission(0xA0 | TWI_ADDRESS_WRITE, 10) == TWI_ERROR_NoError)
+  60:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      {
+  61:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_SendByte(0xDC);
+  62:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  63:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_SendByte(0x01);
+  64:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_SendByte(0x02);
+  65:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_SendByte(0x03);
+  66:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  67:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          // Must stop transmission afterwards to release the bus
+  68:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_StopTransmission();
+  69:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      }
+  70:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  71:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      // Start a read session to device at address 0xA0, internal address 0xDC with a 10ms timeou
+  72:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      if (TWI_StartTransmission(0xA0 | TWI_ADDRESS_WRITE, 10) == TWI_ERROR_NoError)
+  73:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      {
+  74:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_SendByte(0xDC);
+  75:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          TWI_StopTransmission();
+  76:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  77:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          if (TWI_StartTransmission(0xA0 | TWI_ADDRESS_READ, 10) == TWI_ERROR_NoError)
+  78:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          {
+  79:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              uint8_t Byte1, Byte2, Byte3;
+  80:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  81:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              // Read three bytes, acknowledge after the third byte is received
+  82:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              TWI_ReceiveByte(&Byte1, false);
+  83:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              TWI_ReceiveByte(&Byte2, false);
+  84:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              TWI_ReceiveByte(&Byte3, true);
+  85:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  86:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              // Must stop transmission afterwards to release the bus
+  87:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *              TWI_StopTransmission();
+  88:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *          }
+  89:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      }
+  90:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \endcode
+  91:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  * 
+  92:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  <b>High Level API Example:</b>
+  93:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \code
+  94:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      // Initialize the TWI driver before first use at 200KHz
+  95:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      TWI_Init(TWI_BIT_PRESCALE_1, TWI_BITLENGTH_FROM_FREQ(1, 200000));
+  96:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+  97:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      // Start a write session to device at device address 0xA0, internal address 0xDC with a 10m
+  98:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      uint8_t InternalWriteAddress = 0xDC;
+  99:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      uint8_t WritePacket[3] = {0x01, 0x02, 0x03};
+ 100:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+ 101:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      TWI_WritePacket(0xA0, 10, &InternalWriteAddress, sizeof(InternalWriteAddress),
+ 102:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *                      &WritePacket, sizeof(WritePacket);
+ 103:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+ 104:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      // Start a read session to device at address 0xA0, internal address 0xDC with a 10ms timeou
+ 105:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      uint8_t InternalReadAddress = 0xDC;
+ 106:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      uint8_t ReadPacket[3];
+ 107:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+ 108:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *      TWI_ReadPacket(0xA0, 10, &InternalReadAddress, sizeof(InternalReadAddress),
+ 109:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *                     &ReadPacket, sizeof(ReadPacket);
+ 110:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  \endcode
+ 111:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *
+ 112:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  *  @{
+ 113:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h ****  */
+ 114:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 115:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** #ifndef __TWI_AVR8_H__
+ 116:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** #define __TWI_AVR8_H__
+ 117:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 118:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 	/* Includes: */
+ 119:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#include "../../../Common/Common.h"
+ 120:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 121:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#include <stdio.h>
+ 122:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#include <util/twi.h>
+ 123:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 124:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 	/* Enable C linkage for C++ Compilers: */
+ 125:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#if defined(__cplusplus)
+ 126:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			extern "C" {
+ 127:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#endif
+ 128:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 129:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 	/* Preprocessor Checks: */
+ 130:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#if !defined(__INCLUDE_FROM_TWI_H) && !defined(__INCLUDE_FROM_TWI_C)
+ 131:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#error Do not include this file directly. Include LUFA/Drivers/Peripheral/TWI.h instead.
+ 132:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#endif
+ 133:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 134:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#if !(defined(__AVR_AT90USB1286__) || defined(__AVR_AT90USB646__) || \
+ 135:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		      defined(__AVR_AT90USB1287__) || defined(__AVR_AT90USB647__) || \
+ 136:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			  defined(__AVR_ATmega16U4__)  || defined(__AVR_ATmega32U4__) || \
+ 137:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			  defined(__AVR_ATmega32U6__))
+ 138:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#error The TWI peripheral driver is not currently available for your selected microcontroller mo
+ 139:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		#endif
+ 140:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 141:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 	/* Public Interface - May be used in end-application: */
+ 142:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		/* Macros: */
+ 143:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** TWI slave device address mask for a read session. Mask with a slave device base address to o
+ 144:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  the correct TWI bus address for the slave device when reading data from it.
+ 145:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 */
+ 146:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_ADDRESS_READ         0x01
+ 147:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 148:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** TWI slave device address mask for a write session. Mask with a slave device base address to 
+ 149:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  the correct TWI bus address for the slave device when writing data to it.
+ 150:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 */
+ 151:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_ADDRESS_WRITE        0x00
+ 152:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 153:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Mask to retrieve the base address for a TWI device, which can then be ORed with \ref TWI_ADD
+ 154:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  or \ref TWI_ADDRESS_WRITE to obtain the device's read and write address respectively.
+ 155:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 */
+ 156:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_DEVICE_ADDRESS_MASK  0xFE
+ 157:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			
+ 158:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler 
+ 159:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_BIT_PRESCALE_1       ((0 << TWPS1) | (0 << TWPS0))
+ 160:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			
+ 161:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler 
+ 162:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_BIT_PRESCALE_4       ((0 << TWPS1) | (1 << TWPS0))
+ 163:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 164:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler 
+ 165:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_BIT_PRESCALE_16      ((1 << TWPS1) | (0 << TWPS0))
+ 166:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 167:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Bit length prescaler for \ref TWI_Init(). This mask multiplies the TWI bit length prescaler 
+ 168:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_BIT_PRESCALE_64      ((1 << TWPS1) | (1 << TWPS0))
+ 169:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			
+ 170:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Calculates the length of each bit on the TWI bus for a given target frequency. This may be u
+ 171:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  the \ref TWI_Init() function to convert a bus frequency to a number of clocks for the \c Bit
+ 172:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  parameter.
+ 173:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *
+ 174:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \param[in] Prescale   Prescaler set on the TWI bus.
+ 175:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \param[in] Frequency  Desired TWI bus frequency in Hz.
+ 176:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *
+ 177:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \return Bit length in clocks for the given TWI bus frequency at the given prescaler value.
+ 178:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 */
+ 179:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			#define TWI_BITLENGTH_FROM_FREQ(Prescale, Frequency) ((((F_CPU / (Prescale)) / (Frequency)) - 16
+ 180:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 181:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		/* Enums: */
+ 182:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Enum for the possible return codes of the TWI transfer start routine and other dependant TWI
+ 183:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			enum TWI_ErrorCodes_t
+ 184:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			{
+ 185:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWI_ERROR_NoError              = 0, /**< Indicates that the command completed successfully. */
+ 186:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWI_ERROR_BusFault             = 1, /**< A TWI bus fault occurred while attempting to capture t
+ 187:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWI_ERROR_BusCaptureTimeout    = 2, /**< A timeout occurred whilst waiting for the bus to be re
+ 188:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWI_ERROR_SlaveResponseTimeout = 3, /**< No ACK received at the nominated slave address within 
+ 189:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWI_ERROR_SlaveNotReady        = 4, /**< Slave NAKed the TWI bus START condition. */
+ 190:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWI_ERROR_SlaveNAK             = 5, /**< Slave NAKed whilst attempting to send data to the devi
+ 191:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			};
+ 192:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 	
+ 193:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 		/* Inline Functions: */
+ 194:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Initializes the TWI hardware into master mode, ready for data transmission and reception. Th
+ 195:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  before any other TWI operations.
+ 196:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *
+ 197:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  The generated SCL frequency will be according to the formula <pre>F_CPU / (16 + 2 * BitLengt
+ 198:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *
+ 199:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \note The value of the \c BitLength parameter should not be set below 10 or invalid bus cond
+ 200:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *        occur, as indicated in the AVR8 microcontroller datasheet.
+ 201:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *
+ 202:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \param[in] Prescale   Prescaler to use when determining the bus frequency, a \c TWI_BIT_PRES
+ 203:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \param[in] BitLength  Length of the bits sent on the bus.
+ 204:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 */
+ 205:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			static inline void TWI_Init(const uint8_t Prescale, const uint8_t BitLength) ATTR_ALWAYS_INLINE;
+ 206:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			static inline void TWI_Init(const uint8_t Prescale, const uint8_t BitLength)
+ 207:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			{
+ 208:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWCR |= (1 << TWEN);
+ 209:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWSR  = Prescale;
+ 210:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWBR  = BitLength;
+ 211:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			}
+ 212:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 213:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Turns off the TWI driver hardware. If this is called, any further TWI operations will requir
+ 214:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 *  \ref TWI_Init() before the TWI can be used again.
+ 215:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			 */
+ 216:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			static inline void TWI_Disable(void) ATTR_ALWAYS_INLINE;
+ 217:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			static inline void TWI_Disable(void)
+ 218:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			{
+ 219:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWCR &= ~(1 << TWEN);
+ 220:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			}
+ 221:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 
+ 222:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			/** Sends a TWI STOP onto the TWI bus, terminating communication with the currently addressed de
+ 223:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			static inline void TWI_StopTransmission(void) ATTR_ALWAYS_INLINE;
+ 224:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			static inline void TWI_StopTransmission(void)
+ 225:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 			{
+ 226:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/TWI_AVR8.h **** 				TWCR = ((1 << TWINT) | (1 << TWSTO) | (1 << TWEN));
+ 420               		.loc 3 226 0
+ 421 008a 84E9      		ldi r24,lo8(-108)
+ 422 008c 8093 BC00 		sts 188,r24
+ 423               	.LVL44:
+ 424               	.L60:
+ 425               	.LBE17:
+ 426               	.LBE16:
+ 157:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 					break;
+ 158:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				}
+ 159:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			}
+ 160:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			
+ 161:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			TWI_StopTransmission();
+ 162:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+ 163:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	}
+ 164:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	
+ 165:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	return ErrorCode;
+ 166:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** }
+ 427               		.loc 1 166 0
+ 428 0090 8F2D      		mov r24,r15
+ 429               	/* epilogue start */
+ 430 0092 0F90      		pop __tmp_reg__
+ 431 0094 0F90      		pop __tmp_reg__
+ 432 0096 0F90      		pop __tmp_reg__
+ 433 0098 DF91      		pop r29
+ 434 009a CF91      		pop r28
+ 435 009c 1F91      		pop r17
+ 436 009e 0F91      		pop r16
+ 437 00a0 FF90      		pop r15
+ 438               	.LVL45:
+ 439 00a2 EF90      		pop r14
+ 440 00a4 DF90      		pop r13
+ 441               	.LVL46:
+ 442 00a6 CF90      		pop r12
+ 443 00a8 BF90      		pop r11
+ 444 00aa AF90      		pop r10
+ 445 00ac 0895      		ret
+ 446               		.cfi_endproc
+ 447               	.LFE23:
+ 449               		.section	.text.TWI_WritePacket,"ax",@progbits
+ 450               	.global	TWI_WritePacket
+ 452               	TWI_WritePacket:
+ 453               	.LFB24:
+ 167:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 168:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** uint8_t TWI_WritePacket(const uint8_t SlaveAddress,
+ 169:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                         const uint8_t TimeoutMS,
+ 170:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                         const uint8_t* InternalAddress,
+ 171:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                         uint8_t InternalAddressLen,
+ 172:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                         const uint8_t* Buffer,
+ 173:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c ****                         uint8_t Length)
+ 174:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** {
+ 454               		.loc 1 174 0
+ 455               		.cfi_startproc
+ 456               	.LVL47:
+ 457 0000 AF92      		push r10
+ 458               	.LCFI12:
+ 459               		.cfi_def_cfa_offset 3
+ 460               		.cfi_offset 10, -2
+ 461 0002 BF92      		push r11
+ 462               	.LCFI13:
+ 463               		.cfi_def_cfa_offset 4
+ 464               		.cfi_offset 11, -3
+ 465 0004 DF92      		push r13
+ 466               	.LCFI14:
+ 467               		.cfi_def_cfa_offset 5
+ 468               		.cfi_offset 13, -4
+ 469 0006 EF92      		push r14
+ 470               	.LCFI15:
+ 471               		.cfi_def_cfa_offset 6
+ 472               		.cfi_offset 14, -5
+ 473 0008 FF92      		push r15
+ 474               	.LCFI16:
+ 475               		.cfi_def_cfa_offset 7
+ 476               		.cfi_offset 15, -6
+ 477 000a 0F93      		push r16
+ 478               	.LCFI17:
+ 479               		.cfi_def_cfa_offset 8
+ 480               		.cfi_offset 16, -7
+ 481 000c 1F93      		push r17
+ 482               	.LCFI18:
+ 483               		.cfi_def_cfa_offset 9
+ 484               		.cfi_offset 17, -8
+ 485 000e CF93      		push r28
+ 486               	.LCFI19:
+ 487               		.cfi_def_cfa_offset 10
+ 488               		.cfi_offset 28, -9
+ 489 0010 DF93      		push r29
+ 490               	.LCFI20:
+ 491               		.cfi_def_cfa_offset 11
+ 492               		.cfi_offset 29, -10
+ 493 0012 00D0      		rcall .
+ 494 0014 1F92      		push __zero_reg__
+ 495               	.LCFI21:
+ 496               		.cfi_def_cfa_offset 14
+ 497 0016 CDB7      		in r28,__SP_L__
+ 498 0018 DEB7      		in r29,__SP_H__
+ 499               	.LCFI22:
+ 500               		.cfi_def_cfa_register 28
+ 501               	/* prologue: function */
+ 502               	/* frame size = 3 */
+ 503               	/* stack size = 12 */
+ 504               	.L__stack_usage = 12
+ 505 001a F12E      		mov r15,r17
+ 175:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	uint8_t ErrorCode;
+ 176:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 177:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	if ((ErrorCode = TWI_StartTransmission((SlaveAddress & TWI_DEVICE_ADDRESS_MASK) | TWI_ADDRESS_WRIT
+ 506               		.loc 1 177 0
+ 507 001c 8E7F      		andi r24,lo8(-2)
+ 508               	.LVL48:
+ 509 001e 2983      		std Y+1,r18
+ 510 0020 4A83      		std Y+2,r20
+ 511 0022 5B83      		std Y+3,r21
+ 512 0024 0E94 0000 		call TWI_StartTransmission
+ 513               	.LVL49:
+ 514 0028 182F      		mov r17,r24
+ 515               	.LVL50:
+ 516 002a 2981      		ldd r18,Y+1
+ 517 002c 4A81      		ldd r20,Y+2
+ 518 002e 5B81      		ldd r21,Y+3
+ 519 0030 8111      		cpse r24,__zero_reg__
+ 520 0032 00C0      		rjmp .L75
+ 521 0034 5A01      		movw r10,r20
+ 522 0036 D22E      		mov r13,r18
+ 523 0038 D40E      		add r13,r20
+ 524               	.LVL51:
+ 525               	.L76:
+ 178:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	                                       TimeoutMS)) == TWI_ERROR_NoError)
+ 179:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	{
+ 180:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		while (InternalAddressLen--)
+ 526               		.loc 1 180 0 discriminator 1
+ 527 003a DA14      		cp r13,r10
+ 528 003c 01F0      		breq .L77
+ 529               	.LVL52:
+ 181:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+ 182:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			if (!(TWI_SendByte(*(InternalAddress++))))
+ 530               		.loc 1 182 0
+ 531 003e F501      		movw r30,r10
+ 532 0040 8191      		ld r24,Z+
+ 533               	.LVL53:
+ 534 0042 5F01      		movw r10,r30
+ 535               	.LVL54:
+ 536 0044 0E94 0000 		call TWI_SendByte
+ 537               	.LVL55:
+ 538 0048 8111      		cpse r24,__zero_reg__
+ 539 004a 00C0      		rjmp .L76
+ 183:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			{				
+ 184:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				ErrorCode = TWI_ERROR_SlaveNAK;
+ 540               		.loc 1 184 0
+ 541 004c 15E0      		ldi r17,lo8(5)
+ 542               	.LVL56:
+ 543               	.L77:
+ 544               		.loc 1 184 0 is_stmt 0 discriminator 1
+ 545 004e A02E      		mov r10,r16
+ 546               	.LVL57:
+ 547 0050 BF2C      		mov r11,r15
+ 548 0052 0E0D      		add r16,r14
+ 549               	.LVL58:
+ 550               	.L80:
+ 185:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				break;
+ 186:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			}
+ 187:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+ 188:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 
+ 189:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		while (Length--)
+ 551               		.loc 1 189 0 is_stmt 1 discriminator 1
+ 552 0054 0A15      		cp r16,r10
+ 553 0056 01F0      		breq .L79
+ 554               	.LVL59:
+ 190:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		{
+ 191:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			if (!(TWI_SendByte(*(Buffer++))))
+ 555               		.loc 1 191 0
+ 556 0058 F501      		movw r30,r10
+ 557 005a 8191      		ld r24,Z+
+ 558               	.LVL60:
+ 559 005c 5F01      		movw r10,r30
+ 560               	.LVL61:
+ 561 005e 0E94 0000 		call TWI_SendByte
+ 562               	.LVL62:
+ 563 0062 8111      		cpse r24,__zero_reg__
+ 564 0064 00C0      		rjmp .L80
+ 192:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			{
+ 193:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				ErrorCode = TWI_ERROR_SlaveNAK;
+ 565               		.loc 1 193 0
+ 566 0066 15E0      		ldi r17,lo8(5)
+ 567               	.LVL63:
+ 568               	.L79:
+ 569               	.LBB18:
+ 570               	.LBB19:
+ 571               		.loc 3 226 0
+ 572 0068 84E9      		ldi r24,lo8(-108)
+ 573 006a 8093 BC00 		sts 188,r24
+ 574               	.LVL64:
+ 575               	.L75:
+ 576               	.LBE19:
+ 577               	.LBE18:
+ 194:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 				break;
+ 195:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 			}
+ 196:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		}
+ 197:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		
+ 198:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 		TWI_StopTransmission();
+ 199:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	}
+ 200:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	
+ 201:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** 	return ErrorCode;
+ 202:../../LUFA/Drivers/Peripheral/AVR8/TWI_AVR8.c **** }
+ 578               		.loc 1 202 0
+ 579 006e 812F      		mov r24,r17
+ 580               	/* epilogue start */
+ 581 0070 0F90      		pop __tmp_reg__
+ 582 0072 0F90      		pop __tmp_reg__
+ 583 0074 0F90      		pop __tmp_reg__
+ 584 0076 DF91      		pop r29
+ 585 0078 CF91      		pop r28
+ 586 007a 1F91      		pop r17
+ 587               	.LVL65:
+ 588 007c 0F91      		pop r16
+ 589 007e FF90      		pop r15
+ 590 0080 EF90      		pop r14
+ 591 0082 DF90      		pop r13
+ 592 0084 BF90      		pop r11
+ 593 0086 AF90      		pop r10
+ 594 0088 0895      		ret
+ 595               		.cfi_endproc
+ 596               	.LFE24:
+ 598               		.text
+ 599               	.Letext0:
+ 600               		.file 4 "/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/stdint.h
+DEFINED SYMBOLS
+                            *ABS*:00000000 TWI_AVR8.c
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:2      *ABS*:0000003e __SP_H__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:3      *ABS*:0000003d __SP_L__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:4      *ABS*:0000003f __SREG__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:5      *ABS*:0000003b __RAMPZ__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:14     .text.TWI_StartTransmission:00000000 TWI_StartTransmission
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:181    .text.TWI_SendByte:00000000 TWI_SendByte
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:218    .text.TWI_ReceiveByte:00000000 TWI_ReceiveByte
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:279    .text.TWI_ReadPacket:00000000 TWI_ReadPacket
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccB5DtdZ.s:452    .text.TWI_WritePacket:00000000 TWI_WritePacket
+
+NO UNDEFINED SYMBOLS

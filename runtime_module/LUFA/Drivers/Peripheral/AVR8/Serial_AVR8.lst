@@ -1,0 +1,646 @@
+   1               		.file	"Serial_AVR8.c"
+   2               	__SP_H__ = 0x3e
+   3               	__SP_L__ = 0x3d
+   4               	__SREG__ = 0x3f
+   5               	__RAMPZ__ = 0x3b
+   6               	__tmp_reg__ = 0
+   7               	__zero_reg__ = 1
+   8               		.text
+   9               	.Ltext0:
+  10               		.cfi_sections	.debug_frame
+  11               		.section	.text.Serial_putchar,"ax",@progbits
+  12               	.global	Serial_putchar
+  14               	Serial_putchar:
+  15               	.LFB24:
+  16               		.file 1 "../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c"
+   1:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** /*
+   2:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****              LUFA Library
+   3:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****      Copyright (C) Dean Camera, 2011.
+   4:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+   5:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   dean [at] fourwalledcubicle [dot] com
+   6:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****            www.lufa-lib.org
+   7:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** */
+   8:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+   9:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** /*
+  10:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  11:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  12:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   Permission to use, copy, modify, distribute, and sell this
+  13:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   software and its documentation for any purpose is hereby granted
+  14:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   without fee, provided that the above copyright notice appear in
+  15:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   all copies and that both that the copyright notice and this
+  16:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   permission notice and warranty disclaimer appear in supporting
+  17:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   documentation, and that the name of the author not be used in
+  18:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   advertising or publicity pertaining to distribution of the
+  19:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   software without specific, written prior permission.
+  20:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  21:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   The author disclaim all warranties with regard to this
+  22:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   software, including all implied warranties of merchantability
+  23:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   and fitness.  In no event shall the author be liable for any
+  24:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   special, indirect or consequential damages or any damages
+  25:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   whatsoever resulting from loss of use, data or profits, whether
+  26:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   in an action of contract, negligence or other tortious action,
+  27:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   arising out of or in connection with the use or performance of
+  28:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****   this software.
+  29:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** */
+  30:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  31:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** #define  __INCLUDE_FROM_SERIAL_C
+  32:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** #include "../Serial.h"
+  33:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  34:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** FILE USARTSerialStream;
+  35:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  36:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** int Serial_putchar(char DataByte,
+  37:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c ****                    FILE *Stream)
+  38:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** {
+  17               		.loc 1 38 0
+  18               		.cfi_startproc
+  19               	/* prologue: function */
+  20               	/* frame size = 0 */
+  21               	/* stack size = 0 */
+  22               	.L__stack_usage = 0
+  23               	.LVL0:
+  24               	.L3:
+  25               	.LBB25:
+  26               	.LBB26:
+  27               		.file 2 "../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h"
+   1:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** /*
+   2:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****              LUFA Library
+   3:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****      Copyright (C) Dean Camera, 2011.
+   4:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+   5:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   dean [at] fourwalledcubicle [dot] com
+   6:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****            www.lufa-lib.org
+   7:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** */
+   8:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+   9:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** /*
+  10:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   Copyright 2011  Dean Camera (dean [at] fourwalledcubicle [dot] com)
+  11:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  12:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   Permission to use, copy, modify, distribute, and sell this
+  13:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   software and its documentation for any purpose is hereby granted
+  14:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   without fee, provided that the above copyright notice appear in
+  15:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   all copies and that both that the copyright notice and this
+  16:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   permission notice and warranty disclaimer appear in supporting
+  17:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   documentation, and that the name of the author not be used in
+  18:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   advertising or publicity pertaining to distribution of the
+  19:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   software without specific, written prior permission.
+  20:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  21:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   The author disclaim all warranties with regard to this
+  22:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   software, including all implied warranties of merchantability
+  23:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   and fitness.  In no event shall the author be liable for any
+  24:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   special, indirect or consequential damages or any damages
+  25:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   whatsoever resulting from loss of use, data or profits, whether
+  26:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   in an action of contract, negligence or other tortious action,
+  27:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   arising out of or in connection with the use or performance of
+  28:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****   this software.
+  29:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** */
+  30:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  31:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** /** \file
+  32:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \brief Serial USART Peripheral Driver (AVR8)
+  33:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  34:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  On-chip serial USART driver for the 8-bit AVR microcontrollers.
+  35:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  36:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \note This file should not be included directly. It is automatically included as needed by the 
+  37:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *        dispatch header located in LUFA/Drivers/Peripheral/Serial.h.
+  38:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  */
+  39:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  40:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** /** \ingroup Group_Serial
+  41:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \defgroup Group_Serial_AVR8 Serial USART Peripheral Driver (AVR8)
+  42:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  43:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \section Sec_ModDescription Module Description
+  44:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  On-chip serial USART driver for the 8-bit AVR microcontrollers.
+  45:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  46:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \note This file should not be included directly. It is automatically included as needed by the 
+  47:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *        dispatch header located in LUFA/Drivers/Peripheral/Serial.h.
+  48:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  49:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \section Sec_ExampleUsage Example Usage
+  50:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  The following snippet is an example of how this module may be used within a typical
+  51:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  application.
+  52:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  53:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \code
+  54:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *      // Initialize the serial USART driver before first use, with 9600 baud (and no double-speed
+  55:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *      Serial_Init(9600, false);
+  56:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  57:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *      // Send a string through the USART
+  58:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *      Serial_TxString("Test String\r\n");
+  59:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  60:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *      // Receive a byte through the USART
+  61:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *      uint8_t DataByte = Serial_RxByte();
+  62:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  \endcode
+  63:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *
+  64:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  *  @{
+  65:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h ****  */
+  66:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  67:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** #ifndef __SERIAL_AVR8_H__
+  68:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** #define __SERIAL_AVR8_H__
+  69:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  70:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	/* Includes: */
+  71:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#include "../../../Common/Common.h"
+  72:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#include "../../Misc/TerminalCodes.h"
+  73:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		
+  74:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#include <stdio.h>
+  75:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  76:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	/* Enable C linkage for C++ Compilers: */
+  77:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#if defined(__cplusplus)
+  78:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			extern "C" {
+  79:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#endif
+  80:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  81:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	/* Preprocessor Checks: */
+  82:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#if !defined(__INCLUDE_FROM_SERIAL_H) && !defined(__INCLUDE_FROM_SERIAL_C)
+  83:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			#error Do not include this file directly. Include LUFA/Drivers/Peripheral/Serial.h instead.
+  84:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		#endif
+  85:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  86:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	/* Private Interface - For use in library only: */
+  87:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	#if !defined(__DOXYGEN__)
+  88:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		/* External Variables: */
+  89:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			extern FILE USARTSerialStream;
+  90:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	
+  91:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		/* Function Prototypes: */
+  92:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			int Serial_putchar(char DataByte,
+  93:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			                   FILE *Stream);
+  94:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			int Serial_getchar(FILE *Stream);
+  95:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			int Serial_getchar_Blocking(FILE *Stream);
+  96:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	#endif
+  97:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+  98:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 	/* Public Interface - May be used in end-application: */
+  99:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		/* Macros: */
+ 100:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Macro for calculating the baud value from a given baud rate when the \c U2X (double speed) b
+ 101:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  not set.
+ 102:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 103:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] Baud  Target serial UART baud rate.
+ 104:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 105:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \return Closest UBRR register value for the given UART frequency.
+ 106:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 107:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			#define SERIAL_UBBRVAL(Baud)    ((((F_CPU / 16) + (Baud / 2)) / (Baud)) - 1)
+ 108:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 109:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Macro for calculating the baud value from a given baud rate when the \c U2X (double speed) b
+ 110:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  set.
+ 111:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 112:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] Baud  Target serial UART baud rate.
+ 113:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 114:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \return Closest UBRR register value for the given UART frequency.
+ 115:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 116:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			#define SERIAL_2X_UBBRVAL(Baud) ((((F_CPU / 8) + (Baud / 2)) / (Baud)) - 1)
+ 117:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 118:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		/* Function Prototypes: */
+ 119:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Transmits a given string located in program space (FLASH) through the USART.
+ 120:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 121:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] FlashStringPtr  Pointer to a string located in program space.
+ 122:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 123:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			void Serial_SendString_P(const char* FlashStringPtr) ATTR_NON_NULL_PTR_ARG(1);
+ 124:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 125:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Transmits a given string located in SRAM memory through the USART.
+ 126:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 127:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] StringPtr  Pointer to a string located in SRAM space.
+ 128:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 129:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			void Serial_SendString(const char* StringPtr) ATTR_NON_NULL_PTR_ARG(1);
+ 130:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			
+ 131:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Transmits a given buffer located in SRAM memory through the USART.
+ 132:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 133:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] Buffer  Pointer to a buffer containing the data to send.
+ 134:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] Length  Length of the data to send, in bytes.
+ 135:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 136:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			void Serial_SendData(const uint8_t* Buffer, uint16_t Length) ATTR_NON_NULL_PTR_ARG(1);
+ 137:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 138:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 		/* Inline Functions: */
+ 139:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Initializes the USART, ready for serial data transmission and reception. This initializes th
+ 140:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  standard 8-bit, no parity, 1 stop bit settings suitable for most applications.
+ 141:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 142:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] BaudRate     Serial baud rate, in bits per second.
+ 143:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] DoubleSpeed  Enables double speed mode when set, halving the sample time to doubl
+ 144:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 145:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline void Serial_Init(const uint32_t BaudRate,
+ 146:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			                               const bool DoubleSpeed)
+ 147:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 148:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UBRR1  = (DoubleSpeed ? SERIAL_2X_UBBRVAL(BaudRate) : SERIAL_UBBRVAL(BaudRate));
+ 149:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 150:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UCSR1C = ((1 << UCSZ11) | (1 << UCSZ10));
+ 151:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UCSR1A = (DoubleSpeed ? (1 << U2X1) : 0);
+ 152:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UCSR1B = ((1 << TXEN1)  | (1 << RXEN1));
+ 153:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 154:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				DDRD  |= (1 << 3);
+ 155:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				PORTD |= (1 << 2);
+ 156:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 157:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 158:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Turns off the USART driver, disabling and returning used hardware to their default configura
+ 159:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline void Serial_Disable(void)
+ 160:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 161:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UCSR1B = 0;
+ 162:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UCSR1A = 0;
+ 163:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UCSR1C = 0;
+ 164:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 165:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UBRR1  = 0;
+ 166:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 167:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				DDRD  &= ~(1 << 3);
+ 168:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				PORTD &= ~(1 << 2);
+ 169:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 170:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 171:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Creates a standard character stream from the USART so that it can be used with all the regul
+ 172:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  in the avr-libc \c <stdio.h> library that accept a \c FILE stream as a destination (e.g. \c 
+ 173:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  stream is bidirectional and can be used for both input and output functions.
+ 174:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 175:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  Reading data from this stream is non-blocking, i.e. in most instances, complete strings cann
+ 176:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  fetch, as the endpoint will not be ready at some point in the transmission, aborting the tra
+ 177:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  be used when the read data is processed byte-per-bye (via \c getc()) or when the user applic
+ 178:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  line buffering.
+ 179:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 180:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in,out] Stream  Pointer to a FILE structure where the created stream should be placed
+ 181:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *                         and \c stdin will be configured to use the USART.
+ 182:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 183:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \pre The USART must first be configured via a call to \ref Serial_Init() before the stream i
+ 184:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 185:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline void Serial_CreateStream(FILE* Stream)
+ 186:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 187:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				if (!(Stream))
+ 188:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				{
+ 189:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 					Stream = &USARTSerialStream;
+ 190:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 					stdin  = Stream;
+ 191:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 					stdout = Stream;
+ 192:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				}
+ 193:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			
+ 194:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				*Stream = (FILE)FDEV_SETUP_STREAM(Serial_putchar, Serial_getchar, _FDEV_SETUP_RW);
+ 195:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 196:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 197:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Identical to \ref Serial_CreateStream(), except that reads are blocking until the calling st
+ 198:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  the transfer.
+ 199:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 200:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in,out] Stream  Pointer to a FILE structure where the created stream should be placed
+ 201:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *                         and \c stdin will be configured to use the USART.
+ 202:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 203:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \pre The USART must first be configured via a call to \ref Serial_Init() before the stream i
+ 204:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 205:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline void Serial_CreateBlockingStream(FILE* Stream)
+ 206:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 207:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				if (!(Stream))
+ 208:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				{
+ 209:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 					Stream = &USARTSerialStream;
+ 210:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 					stdin  = Stream;
+ 211:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 					stdout = Stream;
+ 212:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				}
+ 213:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 214:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				*Stream = (FILE)FDEV_SETUP_STREAM(Serial_putchar, Serial_getchar_Blocking, _FDEV_SETUP_RW);
+ 215:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 216:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 217:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Indicates whether a character has been received through the USART.
+ 218:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 219:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \return Boolean \c true if a character has been received, \c false otherwise.
+ 220:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 221:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline bool Serial_IsCharReceived(void) ATTR_WARN_UNUSED_RESULT ATTR_ALWAYS_INLINE;
+ 222:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline bool Serial_IsCharReceived(void)
+ 223:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 224:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				return ((UCSR1A & (1 << RXC1)) ? true : false);
+ 225:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 226:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 227:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Transmits a given byte through the USART.
+ 228:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 229:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \param[in] DataByte  Byte to transmit through the USART.
+ 230:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 231:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline void Serial_SendByte(const char DataByte) ATTR_ALWAYS_INLINE;
+ 232:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline void Serial_SendByte(const char DataByte)
+ 233:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 234:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				while (!(UCSR1A & (1 << UDRE1)));
+  28               		.loc 2 234 0
+  29 0000 9091 C800 		lds r25,200
+  30 0004 95FF      		sbrs r25,5
+  31 0006 00C0      		rjmp .L3
+ 235:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UDR1 = DataByte;
+  32               		.loc 2 235 0
+  33 0008 8093 CE00 		sts 206,r24
+  34               	.LBE26:
+  35               	.LBE25:
+  39:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	(void)Stream;
+  40:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  41:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	Serial_SendByte(DataByte);
+  42:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	return 0;
+  43:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** }
+  36               		.loc 1 43 0
+  37 000c 80E0      		ldi r24,0
+  38 000e 90E0      		ldi r25,0
+  39               	.LVL1:
+  40 0010 0895      		ret
+  41               		.cfi_endproc
+  42               	.LFE24:
+  44               		.section	.text.Serial_getchar,"ax",@progbits
+  45               	.global	Serial_getchar
+  47               	Serial_getchar:
+  48               	.LFB25:
+  44:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  45:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** int Serial_getchar(FILE *Stream)
+  46:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** {
+  49               		.loc 1 46 0
+  50               		.cfi_startproc
+  51               	.LVL2:
+  52               	/* prologue: function */
+  53               	/* frame size = 0 */
+  54               	/* stack size = 0 */
+  55               	.L__stack_usage = 0
+  56               	.LBB27:
+  57               	.LBB28:
+ 224:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+  58               		.loc 2 224 0
+  59 0000 8091 C800 		lds r24,200
+  60               	.LVL3:
+  61               	.LBE28:
+  62               	.LBE27:
+  47:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	(void)Stream;
+  48:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  49:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	if (!(Serial_IsCharReceived()))
+  63               		.loc 1 49 0
+  64 0004 87FF      		sbrs r24,7
+  65 0006 00C0      		rjmp .L7
+  66               	.LBB29:
+  67               	.LBB30:
+  68               	.LBB31:
+  69               	.LBB32:
+ 224:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+  70               		.loc 2 224 0
+  71 0008 8091 C800 		lds r24,200
+  72               	.LBE32:
+  73               	.LBE31:
+ 236:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 237:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 
+ 238:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			/** Receives the next byte from the USART.
+ 239:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *
+ 240:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 *  \return Next byte received from the USART, or a negative value if no byte has been received.
+ 241:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			 */
+ 242:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline int16_t Serial_ReceiveByte(void) ATTR_ALWAYS_INLINE;
+ 243:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			static inline int16_t Serial_ReceiveByte(void)
+ 244:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			{
+ 245:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				if (!(Serial_IsCharReceived()))
+  74               		.loc 2 245 0
+  75 000c 87FF      		sbrs r24,7
+  76 000e 00C0      		rjmp .L8
+ 246:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				  return -1;
+ 247:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				
+ 248:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				return UDR1;
+  77               		.loc 2 248 0
+  78 0010 8091 CE00 		lds r24,206
+  79 0014 90E0      		ldi r25,0
+  80 0016 0895      		ret
+  81               	.L7:
+  82               	.LBE30:
+  83               	.LBE29:
+  50:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	  return _FDEV_EOF;
+  84               		.loc 1 50 0
+  85 0018 8EEF      		ldi r24,lo8(-2)
+  86 001a 9FEF      		ldi r25,lo8(-1)
+  87 001c 0895      		ret
+  88               	.L8:
+  89               	.LBB34:
+  90               	.LBB33:
+ 246:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				  return -1;
+  91               		.loc 2 246 0
+  92 001e 8FEF      		ldi r24,lo8(-1)
+  93 0020 9FEF      		ldi r25,lo8(-1)
+  94               	.LBE33:
+  95               	.LBE34:
+  51:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  52:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	return Serial_ReceiveByte();
+  53:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** }
+  96               		.loc 1 53 0
+  97 0022 0895      		ret
+  98               		.cfi_endproc
+  99               	.LFE25:
+ 101               		.section	.text.Serial_getchar_Blocking,"ax",@progbits
+ 102               	.global	Serial_getchar_Blocking
+ 104               	Serial_getchar_Blocking:
+ 105               	.LFB26:
+  54:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  55:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** int Serial_getchar_Blocking(FILE *Stream)
+  56:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** {
+ 106               		.loc 1 56 0
+ 107               		.cfi_startproc
+ 108               	/* prologue: function */
+ 109               	/* frame size = 0 */
+ 110               	/* stack size = 0 */
+ 111               	.L__stack_usage = 0
+ 112               	.LVL4:
+ 113               	.L11:
+ 114               	.LBB35:
+ 115               	.LBB36:
+ 224:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 116               		.loc 2 224 0 discriminator 1
+ 117 0000 8091 C800 		lds r24,200
+ 118               	.LBE36:
+ 119               	.LBE35:
+  57:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	(void)Stream;
+  58:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  59:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	while (!(Serial_IsCharReceived()));
+ 120               		.loc 1 59 0 discriminator 1
+ 121 0004 87FF      		sbrs r24,7
+ 122 0006 00C0      		rjmp .L11
+ 123               	.LBB37:
+ 124               	.LBB38:
+ 125               	.LBB39:
+ 126               	.LBB40:
+ 224:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 127               		.loc 2 224 0
+ 128 0008 8091 C800 		lds r24,200
+ 129               	.LBE40:
+ 130               	.LBE39:
+ 245:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				  return -1;
+ 131               		.loc 2 245 0
+ 132 000c 87FF      		sbrs r24,7
+ 133 000e 00C0      		rjmp .L13
+ 134               		.loc 2 248 0
+ 135 0010 8091 CE00 		lds r24,206
+ 136 0014 90E0      		ldi r25,0
+ 137 0016 0895      		ret
+ 138               	.L13:
+ 246:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				
+ 139               		.loc 2 246 0
+ 140 0018 8FEF      		ldi r24,lo8(-1)
+ 141 001a 9FEF      		ldi r25,lo8(-1)
+ 142               	.LBE38:
+ 143               	.LBE37:
+  60:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	return Serial_ReceiveByte();
+  61:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** }
+ 144               		.loc 1 61 0
+ 145 001c 0895      		ret
+ 146               		.cfi_endproc
+ 147               	.LFE26:
+ 149               		.section	.text.Serial_SendString_P,"ax",@progbits
+ 150               	.global	Serial_SendString_P
+ 152               	Serial_SendString_P:
+ 153               	.LFB27:
+  62:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  63:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** void Serial_SendString_P(const char* FlashStringPtr)
+  64:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** {
+ 154               		.loc 1 64 0
+ 155               		.cfi_startproc
+ 156               	.LVL5:
+ 157               	/* prologue: function */
+ 158               	/* frame size = 0 */
+ 159               	/* stack size = 0 */
+ 160               	.L__stack_usage = 0
+ 161               	.L15:
+ 162               	.LBB41:
+  65:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	uint8_t CurrByte;
+  66:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  67:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	while ((CurrByte = pgm_read_byte(FlashStringPtr)) != 0x00)
+ 163               		.loc 1 67 0 discriminator 1
+ 164 0000 FC01      		movw r30,r24
+ 165               	/* #APP */
+ 166               	 ;  67 "../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c" 1
+ 167 0002 2491      		lpm r18, Z
+ 168               		
+ 169               	 ;  0 "" 2
+ 170               	.LVL6:
+ 171               	/* #NOAPP */
+ 172               	.LBE41:
+ 173 0004 2223      		tst r18
+ 174 0006 01F0      		breq .L19
+ 175               	.L17:
+ 176               	.LBB42:
+ 177               	.LBB43:
+ 234:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UDR1 = DataByte;
+ 178               		.loc 2 234 0
+ 179 0008 3091 C800 		lds r19,200
+ 180 000c 35FF      		sbrs r19,5
+ 181 000e 00C0      		rjmp .L17
+ 235:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 182               		.loc 2 235 0
+ 183 0010 2093 CE00 		sts 206,r18
+ 184               	.LBE43:
+ 185               	.LBE42:
+  68:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	{
+  69:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 		Serial_SendByte(CurrByte);
+  70:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 		FlashStringPtr++;
+ 186               		.loc 1 70 0
+ 187 0014 0196      		adiw r24,1
+ 188               	.LVL7:
+ 189 0016 00C0      		rjmp .L15
+ 190               	.LVL8:
+ 191               	.L19:
+ 192               	/* epilogue start */
+  71:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	}
+  72:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** }
+ 193               		.loc 1 72 0
+ 194 0018 0895      		ret
+ 195               		.cfi_endproc
+ 196               	.LFE27:
+ 198               		.section	.text.Serial_SendString,"ax",@progbits
+ 199               	.global	Serial_SendString
+ 201               	Serial_SendString:
+ 202               	.LFB28:
+  73:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  74:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** void Serial_SendString(const char* StringPtr)
+  75:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** {
+ 203               		.loc 1 75 0
+ 204               		.cfi_startproc
+ 205               	.LVL9:
+ 206               	/* prologue: function */
+ 207               	/* frame size = 0 */
+ 208               	/* stack size = 0 */
+ 209               	.L__stack_usage = 0
+ 210               	.L21:
+  76:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	uint8_t CurrByte;
+  77:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  78:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	while ((CurrByte = *StringPtr) != 0x00)
+ 211               		.loc 1 78 0 discriminator 1
+ 212 0000 FC01      		movw r30,r24
+ 213 0002 2191      		ld r18,Z+
+ 214 0004 CF01      		movw r24,r30
+ 215               	.LVL10:
+ 216 0006 2223      		tst r18
+ 217 0008 01F0      		breq .L25
+ 218               	.L23:
+ 219               	.LBB44:
+ 220               	.LBB45:
+ 234:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UDR1 = DataByte;
+ 221               		.loc 2 234 0
+ 222 000a 3091 C800 		lds r19,200
+ 223 000e 35FF      		sbrs r19,5
+ 224 0010 00C0      		rjmp .L23
+ 235:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 225               		.loc 2 235 0
+ 226 0012 2093 CE00 		sts 206,r18
+ 227               	.LVL11:
+ 228 0016 00C0      		rjmp .L21
+ 229               	.LVL12:
+ 230               	.L25:
+ 231               	/* epilogue start */
+ 232               	.LBE45:
+ 233               	.LBE44:
+  79:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	{
+  80:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 		Serial_SendByte(CurrByte);
+  81:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 		StringPtr++;
+  82:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	}
+  83:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** }
+ 234               		.loc 1 83 0
+ 235 0018 0895      		ret
+ 236               		.cfi_endproc
+ 237               	.LFE28:
+ 239               		.section	.text.Serial_SendData,"ax",@progbits
+ 240               	.global	Serial_SendData
+ 242               	Serial_SendData:
+ 243               	.LFB29:
+  84:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 
+  85:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** void Serial_SendData(const uint8_t* Buffer, uint16_t Length)
+  86:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** {
+ 244               		.loc 1 86 0
+ 245               		.cfi_startproc
+ 246               	.LVL13:
+ 247               	/* prologue: function */
+ 248               	/* frame size = 0 */
+ 249               	/* stack size = 0 */
+ 250               	.L__stack_usage = 0
+ 251 0000 680F      		add r22,r24
+ 252 0002 791F      		adc r23,r25
+ 253               	.LVL14:
+ 254               	.L27:
+  87:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	while (Length--)
+ 255               		.loc 1 87 0 discriminator 1
+ 256 0004 8617      		cp r24,r22
+ 257 0006 9707      		cpc r25,r23
+ 258 0008 01F0      		breq .L31
+ 259               	.LVL15:
+  88:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** 	  Serial_SendByte(*(Buffer++));
+ 260               		.loc 1 88 0
+ 261 000a FC01      		movw r30,r24
+ 262 000c 2191      		ld r18,Z+
+ 263               	.LVL16:
+ 264 000e CF01      		movw r24,r30
+ 265               	.LVL17:
+ 266               	.L29:
+ 267               	.LBB46:
+ 268               	.LBB47:
+ 234:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 				UDR1 = DataByte;
+ 269               		.loc 2 234 0
+ 270 0010 3091 C800 		lds r19,200
+ 271 0014 35FF      		sbrs r19,5
+ 272 0016 00C0      		rjmp .L29
+ 235:../../LUFA/Drivers/Peripheral/AVR8/../AVR8/Serial_AVR8.h **** 			}
+ 273               		.loc 2 235 0
+ 274 0018 2093 CE00 		sts 206,r18
+ 275 001c 00C0      		rjmp .L27
+ 276               	.LVL18:
+ 277               	.L31:
+ 278               	/* epilogue start */
+ 279               	.LBE47:
+ 280               	.LBE46:
+  89:../../LUFA/Drivers/Peripheral/AVR8/Serial_AVR8.c **** }
+ 281               		.loc 1 89 0
+ 282 001e 0895      		ret
+ 283               		.cfi_endproc
+ 284               	.LFE29:
+ 286               		.comm	USARTSerialStream,14,1
+ 287               		.text
+ 288               	.Letext0:
+ 289               		.file 3 "/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/stdint.h
+ 290               		.file 4 "/Users/sergio/Downloads/Arduino.app/Contents/Java/hardware/tools/avr/avr/include/stdio.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 Serial_AVR8.c
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:2      *ABS*:0000003e __SP_H__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:3      *ABS*:0000003d __SP_L__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:4      *ABS*:0000003f __SREG__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:5      *ABS*:0000003b __RAMPZ__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:6      *ABS*:00000000 __tmp_reg__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:7      *ABS*:00000001 __zero_reg__
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:14     .text.Serial_putchar:00000000 Serial_putchar
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:47     .text.Serial_getchar:00000000 Serial_getchar
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:104    .text.Serial_getchar_Blocking:00000000 Serial_getchar_Blocking
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:152    .text.Serial_SendString_P:00000000 Serial_SendString_P
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:201    .text.Serial_SendString:00000000 Serial_SendString
+/var/folders/gx/kn5blx6n78333p7442q7pm940000gn/T//ccBaivvc.s:242    .text.Serial_SendData:00000000 Serial_SendData
+                            *COM*:0000000e USARTSerialStream
+
+UNDEFINED SYMBOLS
+__do_clear_bss
